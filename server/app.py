@@ -53,17 +53,26 @@ class Signup(Resource):
     def post(self):
         try:
             data = request.get_json()
-            new_user = Customer(**data)
+            role = data.pop("role", None)
+            
+            if role == "customer":
+                new_user = Customer(**data)
+            elif role == "photographer":
+                new_user = Photographer(**data)
+            else:
+                return make_response({"error": "Invalid role provided"}, 400)
+
             db.session.add(new_user)
             db.session.commit()
+            
             session["user_id"] = new_user.id
             return make_response(new_user.to_dict(), 201)
+
         except Exception as e:
             db.session.rollback()
             if "UNIQUE constraint failed" in str(e):
                 return make_response({"error": "Email already exists"}, 400)
             return make_response({"error": str(e)}, 400)
-
 
         
 

@@ -1,5 +1,6 @@
 import App from "./App";
 import Signup from "./signup";
+import Landing from "./landing";
 import { createBrowserRouter } from "react-router-dom";
 
 export const router = createBrowserRouter([
@@ -9,7 +10,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <App />,
+        element: <Landing />,
       },
       {
         path: "/signup",

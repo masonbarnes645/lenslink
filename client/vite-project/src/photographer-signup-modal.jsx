@@ -9,6 +9,8 @@ import { Button, Modal, Container, Form as SemanticForm, Message, Grid, Input } 
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as yup from "yup";
 import React from 'react';
+import toast from "react-hot-toast";
+
 
 const schema = yup.object().shape({
   first_name: yup.string().required("First Name is Required"),
@@ -19,6 +21,40 @@ const schema = yup.object().shape({
 
 const PhotographerSignUp = () => {
   const [open, setOpen] = React.useState(false);
+
+
+  const handleFormSubmit = (formData, { setSubmitting }) => {
+    fetch("http://localhost:5555/api/v1/signup", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            first_name: formData.first_name,
+            last_name: formData.last_name,
+            email: formData.email,
+            password: formData.password, 
+            role: "photographer"
+        })
+    })
+        .then((resp) => {
+            if (resp.ok) {
+                return resp.json().then((data) => {
+                    navigate(`/profile`);
+                    setOpen(false); 
+                });
+            } else {
+                return resp.json().then((errorObj) => {
+                    toast.error(errorObj.error);
+                });
+            }
+        })
+        .catch((errorObj) => {
+            toast.error(errorObj.error);
+        })
+        .finally(() => setSubmitting(false));
+};
+
 
   return (
     <div>

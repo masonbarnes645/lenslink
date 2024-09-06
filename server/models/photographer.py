@@ -1,7 +1,7 @@
 from models.__init__ import SerializerMixin, validates, db, re, hybrid_property, flask_bcrypt
 
 
-class Photographer(db.Model):
+class Photographer(db.Model, SerializerMixin):
     __tablename__ = "photographers"
     
     id = db.Column(db.Integer, primary_key=True)
@@ -16,7 +16,10 @@ class Photographer(db.Model):
     reviews = db.relationship("Review", back_populates="photographer")
     bookings = db.relationship("Booking", back_populates="photographer")
 
-
+    def __init__(self, email, password=None, **kwargs):
+        super().__init__(email=email, **kwargs)
+        if password:
+            self.password_hash = password
     @hybrid_property
     def password_hash(self):
         raise AttributeError("Passwords are private")

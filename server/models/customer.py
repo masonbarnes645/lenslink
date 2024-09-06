@@ -15,11 +15,10 @@ class Customer(db.Model, SerializerMixin):
 
     bookings = db.relationship("Booking", back_populates="customer")
 
-    def __init__(self, email, password_hash=None, **kwargs):
+    def __init__(self, email, password=None, **kwargs):
         super().__init__(email=email, **kwargs)
-        if password_hash:
-            self.password_hash = password_hash
-
+        if password:
+            self.password_hash = password
     @hybrid_property
     def password_hash(self):
         raise AttributeError("Passwords are private")
