@@ -73,12 +73,20 @@ class Signup(Resource):
             if "UNIQUE constraint failed" in str(e):
                 return make_response({"error": "Email already exists"}, 400)
             return make_response({"error": str(e)}, 400)
+        
+class Photographers(Resource):
+    def get(self):
+        try:
+            return make_response([photographer.to_dict() for photographer in Photographer.query], 200)
+        except Exception as e:
+            return make_response({"error": str(e)}, 404)
 
         
 
 api.add_resource(PhotoById, "/photographs/<int:id>")
 api.add_resource(Photos, "/photographs")
 api.add_resource(Signup, "/signup")
+api.add_resource(Photographers, "/photographers")
 
 
 if __name__ == "__main__":
