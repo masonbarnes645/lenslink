@@ -90,12 +90,52 @@ class Login(Resource):
 
             if user and user.authenticate(password):
                 session["user_id"] = user.id
+                session["role"] = "customer" if isinstance(user, Customer) else "photographer"
+                print(f"Session after login: {session}")
+
                 return make_response(user.to_dict(), 200)
 
             return make_response({"error": "Incorrect email or password"}, 401)
 
         except Exception as e:
             return make_response({"error": str(e)}, 422)
+        
+class CheckSession(Resource):
+    def get(self):
+        try:
+            user_id = session.get("user_id")
+            role = session.get("role")
+
+            if not user_id or not role:
+                return make_response({"error": "No logged in user"}, 401)
+
+            if role == "customer":
+                user = db.session.get(Customer, user_id)
+            elif role == "photographer":
+                user = db.session.get(Photographer, user_id)
+            else:
+                return make_response({"error": "Invalid role in session"}, 400)
+            
+            if user:
+                return make_response(
+                    user.to_dict(rules=("id", "email", "first_name")), 200
+                )
+            
+            return make_response({"error": "User not found"}, 404)
+
+        except Exception as e:
+            return make_response({"error": str(e)}, 422)
+        
+class Logout(Resource):
+    def delete(self):
+        try:
+            if session.get("user_id"):
+                del session["user_id"]
+                return make_response({}, 204)
+            else:
+                return make_response({}, 400)
+        except Exception as e:
+            return make_response({}, 400)
 
 
 class Photographers(Resource):
@@ -124,6 +164,8 @@ api.add_resource(Signup, "/signup")
 api.add_resource(Photographers, "/photographers")
 api.add_resource(PhotographerById, "/photographers/<int:id>")
 api.add_resource(Login, "/login")
+api.add_resource(CheckSession, "/check-session")
+api.add_resource(Logout,"/logout")
 
 
 if __name__ == "__main__":
