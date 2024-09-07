@@ -53,6 +53,11 @@ class Signup(Resource):
     def post(self):
         try:
             data = request.get_json()
+            email = data.get('email')
+            cEmail = db.session.query(Customer).filter_by(email=email).first()
+            pEmail = db.session.query(Photographer).filter_by(email=email).first()
+            if cEmail or pEmail:
+                return make_response({"error":"Email is already registered to account"}, 400)
             role = data.pop("role", None)
             
             if role == "customer":
@@ -74,12 +79,42 @@ class Signup(Resource):
                 return make_response({"error": "Email already exists"}, 400)
             return make_response({"error": str(e)}, 400)
         
+class Login(Resource):
+    def post(self):
+        try:
+            data = request.get_json()
+            email = data.get("email")
+            password = data.get("password")
+
+            user = Customer.query.filter_by(email=email).first() or Photographer.query.filter_by(email=email).first()
+
+            if user and user.authenticate(password):
+                session["user_id"] = user.id
+                return make_response(user.to_dict(), 200)
+
+            return make_response({"error": "Incorrect email or password"}, 401)
+
+        except Exception as e:
+            return make_response({"error": str(e)}, 422)
+
+
 class Photographers(Resource):
     def get(self):
         try:
             return make_response([photographer.to_dict() for photographer in Photographer.query], 200)
         except Exception as e:
             return make_response({"error": str(e)}, 404)
+        
+class PhotographerById(Resource):
+    def get(self, id):
+        try:
+            photographer = db.session.get(Photographer, id)
+            if photographer:
+                return make_response(photographer.to_dict(), 200 )
+            return make_response({"error": str(e)}, 404)
+        except Exception as e:
+            return make_response({"error": str(e)}, 400)
+
 
         
 
@@ -87,6 +122,8 @@ api.add_resource(PhotoById, "/photographs/<int:id>")
 api.add_resource(Photos, "/photographs")
 api.add_resource(Signup, "/signup")
 api.add_resource(Photographers, "/photographers")
+api.add_resource(PhotographerById, "/photographers/<int:id>")
+api.add_resource(Login, "/login")
 
 
 if __name__ == "__main__":

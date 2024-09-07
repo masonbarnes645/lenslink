@@ -10,7 +10,6 @@ const Photographers = () =>{
           .then((resp) => {
             if (resp.ok) {
               resp.json().then(setPhotographers);
-              console.log(photographers)
             } else {
               resp.json().then((errorObj) => toast.error(errorObj.error));
             }
