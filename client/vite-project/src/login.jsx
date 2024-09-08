@@ -2,6 +2,8 @@ import { Button, Container, Form as SemanticForm, Message, Grid, Input } from 's
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as yup from "yup";
 import toast from 'react-hot-toast';
+import { useContext } from 'react';
+import UserContext from "./usercontext";
 
 const schema = yup.object().shape({
     email: yup.string().required("Email is Required"),
@@ -11,9 +13,9 @@ const schema = yup.object().shape({
 const Login = () => {
     const initialValues = {
         email: '',
-        password_hash: '' 
+        password: '' 
     };
-
+    const { user,setUser } = useContext(UserContext);
 
     const handleFormSubmit = (formData, { setSubmitting }) => {
         fetch("/api/v1/login", {
@@ -29,8 +31,8 @@ const Login = () => {
             .then((resp) => {
                 if (resp.ok) {
                     return resp.json().then((data) => {
-                        navigate(`/profile`);
                         setOpen(false); 
+                        setUser(data)
                     });
                 } else {
                     return resp.json().then((errorObj) => {

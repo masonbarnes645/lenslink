@@ -1,5 +1,6 @@
 
 import React, { createContext, useState, useEffect } from 'react';
+import toast from 'react-hot-toast';
 
 const UserContext = createContext();
 

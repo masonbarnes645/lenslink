@@ -106,7 +106,7 @@ class CheckSession(Resource):
             user_id = session.get("user_id")
             role = session.get("role")
 
-            if not user_id or not role:
+            if not user_id:
                 return make_response({"error": "No logged in user"}, 401)
 
             if role == "customer":
@@ -133,7 +133,7 @@ class Logout(Resource):
                 del session["user_id"]
                 return make_response({}, 204)
             else:
-                return make_response({}, 400)
+                return make_response({}, 401)
         except Exception as e:
             return make_response({}, 400)
 
