@@ -1,9 +1,11 @@
 import { Outlet } from "react-router-dom";
 import NavBar from "./navbar";
+import { UserProvider } from "./usercontext";
 function App() {
 
 
   return (
+  <UserProvider>
     <div className="app">
 
       <header>
@@ -13,6 +15,7 @@ function App() {
         <Outlet />
       </div>
     </div>
+  </UserProvider>
   );
 }
 
