@@ -8,7 +8,6 @@ const NavBar = () =>{
   const handleLogOut = () =>{
         fetch("/api/v1/logout", {
             method: "DELETE",
-            credentials: "include"
           }).then((res) => {
             if (res.ok) {
               setUser(null);
