@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-
+import NavBar from "./navbar";
 function App() {
 
 
@@ -7,7 +7,7 @@ function App() {
     <div className="app">
 
       <header>
-        {/* <NavBar/> */}
+        <NavBar/>
       </header>
       <div className="content">
         <Outlet />

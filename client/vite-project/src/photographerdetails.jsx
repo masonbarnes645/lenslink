@@ -8,8 +8,13 @@ const PhotographerDetails = () => {
     })
 
     return(
-        <h1></h1>
+        <div>
+        <h1>beep boop</h1>
+    
+        </div>
     )
 }
 
 export default PhotographerDetails
+
+// create booking details (for customers) /bookings post

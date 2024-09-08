@@ -154,7 +154,19 @@ class PhotographerById(Resource):
             return make_response({"error": str(e)}, 404)
         except Exception as e:
             return make_response({"error": str(e)}, 400)
-
+        
+class Bookings(Resource):
+    def post(self):
+        try:
+            data = request.get_json()
+            new_booking = Booking(**data)
+            db.session.add(new_booking)
+            db.session.commit()
+            return make_response(new_booking.to_dict(), 201)
+        except Exception as e:
+            db.session.rollback()
+            return make_response({"error": str(e)}, 400)
+    
 
         
 
@@ -166,6 +178,7 @@ api.add_resource(PhotographerById, "/photographers/<int:id>")
 api.add_resource(Login, "/login")
 api.add_resource(CheckSession, "/check-session")
 api.add_resource(Logout,"/logout")
+api.add_resource(Bookings, "/bookings")
 
 
 if __name__ == "__main__":
