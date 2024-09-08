@@ -3,7 +3,7 @@
 const NavBar = () =>{
     
     const handleLogOut = () =>{
-        fetch("/logout", {
+        fetch("http://localhost:5555/api/v1/logout", {
             method: "DELETE",
           }).then((res) => {
             if (res.status == 204) {
@@ -15,7 +15,7 @@ const NavBar = () =>{
 
     return(
         <>
-            <h1>SUCK MY DICK</h1>
+            <h1>test</h1>
             <button onClick={handleLogOut}>Log Out</button>
         </>
     )
