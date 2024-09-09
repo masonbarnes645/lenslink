@@ -3,7 +3,9 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as yup from "yup";
 import toast from 'react-hot-toast';
 import { useContext } from 'react';
-import UserContext from "./usercontext";
+import { UserContext } from './usercontext';
+
+
 
 const schema = yup.object().shape({
     email: yup.string().required("Email is Required"),
@@ -15,7 +17,7 @@ const Login = () => {
         email: '',
         password: '' 
     };
-    const { user,setUser } = useContext(UserContext);
+    const {  setUser } = useContext(UserContext);
 
     const handleFormSubmit = (formData, { setSubmitting }) => {
         fetch("/api/v1/login", {
@@ -30,8 +32,8 @@ const Login = () => {
         })
             .then((resp) => {
                 if (resp.ok) {
-                    return resp.json().then((data) => {
-                        setOpen(false); 
+                    resp.json().then((data) => {
+                        console.log(data) 
                         setUser(data)
                     });
                 } else {

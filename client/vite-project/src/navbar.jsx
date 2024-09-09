@@ -1,36 +1,39 @@
-import { useContext } from "react";
-import UserContext from "./usercontext";
+import { useContext, useEffect } from "react";
+
 import toast from "react-hot-toast";
+import { useUser } from "./usercontext";
 
-const NavBar = () =>{
-  const { user,setUser } = useContext(UserContext);
-  
-  const handleLogOut = () =>{
-        fetch("/api/v1/logout", {
-            method: "DELETE",
-          }).then((res) => {
-            if (res.ok) {
-              setUser(null);
-            }else {
-              return res.json().then((errorObj) => {
-                  toast.error(errorObj.error);
-              });
-          }
-      })
-      .catch((errorObj) => {
+function NavBar() {
+  const { user } = useUser();
+
+
+
+  const handleLogOut = () => {
+    fetch("/api/v1/logout", {
+      method: "DELETE",
+    }).then((res) => {
+      if (res.ok) {
+        setUser(null);
+      } else {
+        return res.json().then((errorObj) => {
           toast.error(errorObj.error);
-          console.log("21")
-          });
-    }
+        });
+      }
+    })
+      .catch((errorObj) => {
+        toast.error(errorObj.error);
+        console.log("21")
+      });
+  }
 
 
-    return(
-        <>
-            {user ? (<h1>11</h1>) : (<h2>22</h2>)}
-            <h1>test</h1>
-            <button onClick={handleLogOut}>Log Out</button>
-        </>
-    )
+  return (
+    <>
+      {user ? (<h1>11</h1>) : (<h2>22</h2>)}
+      <h1>test</h1>
+      <button onClick={handleLogOut}>Log Out</button>
+    </>
+  )
 }
 
 export default NavBar

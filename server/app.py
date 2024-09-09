@@ -118,7 +118,7 @@ class CheckSession(Resource):
             
             if user:
                 return make_response(
-                    user.to_dict(rules=("id", "email", "first_name")), 200
+                    user.to_dict(rules=("id", "email")), 200
                 )
             
             return make_response({"error": "User not found"}, 404)

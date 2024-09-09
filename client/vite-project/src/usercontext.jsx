@@ -1,25 +1,30 @@
-
 import React, { createContext, useState, useEffect } from 'react';
-import toast from 'react-hot-toast';
 
-const UserContext = createContext();
+export const UserContext = createContext();
 
-export const UserProvider = ({ children }) => {
+export function UserProvider({ children }) {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    fetch("/check-session")
+    console.log("Current user:", user);
+  }, [user]);
+  useEffect(() => {
+    fetch("/check-session", {
+      credentials: "include",
+    })
       .then((res) => {
         if (res.status === 200) {
-          return res.json().then(setUser);
+          return res.json().then((data) => {
+            setUser(data.user);
+          });
         } else {
           return res.json().then((errorObj) => {
-            toast.error(errorObj.error);
+            console.error(errorObj.error);
           });
         }
       })
       .catch((error) => {
-        toast.error(error.message);
+        console.error(error.message);
       });
   }, []);
 
@@ -28,6 +33,8 @@ export const UserProvider = ({ children }) => {
       {children}
     </UserContext.Provider>
   );
-};
+}
 
-export default UserContext;
+export function useUser() {
+  return React.useContext(UserContext);
+}
