@@ -1,15 +1,16 @@
 import { useContext, useEffect } from "react";
+import { UserContext } from './usercontext';
 
 import toast from "react-hot-toast";
-import { useUser } from "./usercontext";
+
 
 function NavBar() {
-  const { user } = useUser();
+  const { user, setUser } = useContext(UserContext);
 
 
 
   const handleLogOut = () => {
-    fetch("/api/v1/logout", {
+    fetch("http://localhost:5555/api/v1/logout", {
       method: "DELETE",
     }).then((res) => {
       if (res.ok) {

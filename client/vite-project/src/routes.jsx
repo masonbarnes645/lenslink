@@ -4,6 +4,7 @@ import Landing from "./landing";
 import { createBrowserRouter } from "react-router-dom";
 import Photographers from "./browsephotographers";
 import Login from "./login";
+import PhotographerDetails from "./photographerdetails";
 
 export const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ export const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login />
+      },
+      {
+        path: "/photographers/:photographerId",
+        element: <PhotographerDetails />
       }
     ],
   },

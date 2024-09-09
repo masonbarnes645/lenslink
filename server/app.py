@@ -166,7 +166,7 @@ class Bookings(Resource):
         except Exception as e:
             db.session.rollback()
             return make_response({"error": str(e)}, 400)
-    
+        
 
         
 
