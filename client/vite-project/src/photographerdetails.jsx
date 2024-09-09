@@ -7,7 +7,7 @@ const PhotographerDetails = () => {
     const { photographerId } = useParams();
     const [photographer, setPhotographer] = useState(null)
     const { user } = useContext(UserContext)
-
+    
     useEffect(() => {
 
           fetch(`http://localhost:5555/api/v1/photographers/${photographerId}`)
