@@ -1,6 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { UserContext } from "./usercontext";
+import NewBooking from "./newbookingmodal";
+
 const PhotographerDetails = () => {
     const { photographerId } = useParams();
     const [photographer, setPhotographer] = useState(null)
@@ -28,6 +30,8 @@ const PhotographerDetails = () => {
       return(
         <div>
         <h1>{photographer.first_name}</h1>
+        <NewBooking photographerId={photographerId} />
+
     
         </div>
     )

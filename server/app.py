@@ -129,6 +129,7 @@ class CheckSession(Resource):
 class Logout(Resource):
     def delete(self):
         try:
+            print(session)
             if session.get("user_id"):
                 del session["user_id"]
                 return make_response({}, 204)

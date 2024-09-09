@@ -9,9 +9,7 @@ export function UserProvider({ children }) {
     console.log("Current user:", user);
   }, [user]);
   useEffect(() => {
-    fetch("/check-session", {
-      credentials: "include",
-    })
+    fetch("/check-session")
       .then((res) => {
         if (res.status === 200) {
           return res.json().then((data) => {
