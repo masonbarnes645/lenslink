@@ -24,9 +24,10 @@ const PhotographerDetails = () => {
             .catch((errorObj) => toast.error(errorObj.error));
       }, [photographerId, user]);
 
-    return(
+    if (photographer)
+      return(
         <div>
-        <h1>{photographer.email}</h1>
+        <h1>{photographer.first_name}</h1>
     
         </div>
     )
