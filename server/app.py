@@ -4,7 +4,7 @@ from flask_restful import Resource
 import os
 from datetime import datetime
 from functools import wraps
-
+import ipdb
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 DATABASE = os.environ.get("DB_URI", f"sqlite:///{os.path.join(BASE_DIR, 'app.db')}")
@@ -71,7 +71,10 @@ class Signup(Resource):
             db.session.commit()
             
             session["user_id"] = new_user.id
-            return make_response(new_user.to_dict(), 201)
+            session["role"] = "customer" if isinstance(new_user, Customer) else "photographer"
+            serialized_user = new_user.to_dict()
+            serialized_user["role"] = session.get("role")
+            return make_response(serialized_user, 201)
 
         except Exception as e:
             db.session.rollback()
@@ -92,8 +95,9 @@ class Login(Resource):
                 session["user_id"] = user.id
                 session["role"] = "customer" if isinstance(user, Customer) else "photographer"
                 print(f"Session after login: {session}")
-
-                return make_response(user.to_dict(), 200)
+                serialized_user = user.to_dict()
+                serialized_user["role"] = session.get("role")
+                return make_response(serialized_user, 200)
 
             return make_response({"error": "Incorrect email or password"}, 401)
 
@@ -117,9 +121,9 @@ class CheckSession(Resource):
                 return make_response({"error": "Invalid role in session"}, 400)
             
             if user:
-                return make_response(
-                    user.to_dict(rules=("id", "email")), 200
-                )
+                serialized_user = user.to_dict()
+                serialized_user["role"] = session.get("role")
+                return make_response(serialized_user, 200)
             
             return make_response({"error": "User not found"}, 404)
 
@@ -129,11 +133,13 @@ class CheckSession(Resource):
 class Logout(Resource):
     def delete(self):
         try:
-            print(session)
             if session.get("user_id"):
+                print("User ID found in session:", session["user_id"])
                 del session["user_id"]
+                del session["role"]
                 return make_response({}, 204)
             else:
+                print("User ID not found in session.")
                 return make_response({}, 401)
         except Exception as e:
             return make_response({}, 400)
@@ -155,6 +161,20 @@ class PhotographerById(Resource):
             return make_response({"error": str(e)}, 404)
         except Exception as e:
             return make_response({"error": str(e)}, 400)
+    def delete(self, id):
+        try:
+            photographer = db.session.get(Photographer, id)
+            if photographer:
+                db.session.delete(photographer)
+                db.session.commit()
+                del session["user_id"]
+                del session["role"]
+                return make_response({}, 204)
+        except Exception as e:
+            db.session.rollback()
+            return make_response({"error": str(e)}, 422)
+
+
         
 class Bookings(Resource):
     def post(self):

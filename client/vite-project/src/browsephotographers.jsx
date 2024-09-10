@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import toast from "react-hot-toast";
 import { Container, Grid } from "semantic-ui-react";
-import Slate from "./photographerslate";
+import PSlate from "./photographerslate";
 
 const Photographers = () =>{
     const [photographers, setPhotographers] = useState([])
@@ -24,7 +24,7 @@ const Photographers = () =>{
           {photographers.length > 0 ? (
             photographers.map((photographer) => (
               <Grid.Column key={photographer.id}>
-                <Slate {...photographer} />
+                <PSlate {...photographer} />
               </Grid.Column>
             ))
           ) : (

@@ -12,8 +12,8 @@ function NavBar() {
   const { user, setUser } = useContext(UserContext);
 
 
-  const handleLogut = () => {
-    fetch("http://localhost:5555/api/v1/logout", {
+  const handleLogout = () => {
+    fetch("/api/v1/logout", {
       method: "DELETE",
     }).then((res) => {
       if (res.status == 204) {

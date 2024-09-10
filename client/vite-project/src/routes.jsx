@@ -5,6 +5,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Photographers from "./browsephotographers";
 import Login from "./login";
 import PhotographerDetails from "./photographerdetails";
+import Profile from "./profile";
 
 export const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ export const router = createBrowserRouter([
       {
         path: "/photographers/:photographerId",
         element: <PhotographerDetails />
+      },
+      {
+        path:"/myprofile",
+        element: <Profile />
       }
     ],
   },

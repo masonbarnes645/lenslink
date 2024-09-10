@@ -9,11 +9,11 @@ export function UserProvider({ children }) {
     console.log("Current user:", user);
   }, [user]);
   useEffect(() => {
-    fetch("/check-session")
+    fetch("/api/v1/check-session")
       .then((res) => {
         if (res.status === 200) {
           return res.json().then((data) => {
-            setUser(data.user);
+            setUser(data);
           });
         } else {
           return res.json().then((errorObj) => {
