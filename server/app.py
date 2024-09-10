@@ -173,6 +173,21 @@ class PhotographerById(Resource):
         except Exception as e:
             db.session.rollback()
             return make_response({"error": str(e)}, 422)
+        
+class CustomerById(Resource):
+        def delete(self, id):
+            try:
+                customer = db.session.get(Customer, id)
+                if customer:
+                    db.session.delete(customer)
+                    db.session.commit()
+                    del session["user_id"]
+                    del session["role"]
+                    return make_response({}, 204)
+            except Exception as e:
+                db.session.rollback()
+                return make_response({"error": str(e)}, 422)
+
 
 
         
@@ -196,6 +211,7 @@ api.add_resource(Photos, "/photographs")
 api.add_resource(Signup, "/signup")
 api.add_resource(Photographers, "/photographers")
 api.add_resource(PhotographerById, "/photographers/<int:id>")
+api.add_resource(CustomerById, "/customers/<int:id>")
 api.add_resource(Login, "/login")
 api.add_resource(CheckSession, "/check-session")
 api.add_resource(Logout,"/logout")
