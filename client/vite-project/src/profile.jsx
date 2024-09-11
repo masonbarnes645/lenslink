@@ -3,9 +3,11 @@ import { UserContext } from './usercontext';
 import Signup from "./signup";
 import Bslate from "./bookingslate";
 import { Container, Grid, Button } from "semantic-ui-react";
+import ChangePassword from "./changepassword";
 
 const Profile = () => {
     const { user } = useContext(UserContext);
+    
 
     const handleDeleteCustomer = () => {
         fetch(`/api/v1/customers/${user.id}`, {
@@ -68,6 +70,7 @@ const Profile = () => {
             <Button color="red" onClick={handleDeleteAccount}>
                 Delete Account
             </Button>
+            <ChangePassword />
         </Container>
     );
 
