@@ -187,6 +187,18 @@ class CustomerById(Resource):
             except Exception as e:
                 db.session.rollback()
                 return make_response({"error": str(e)}, 422)
+        def patch(self, id):
+            try:
+                customer = db.session.get(Customer, id)
+                data = request.get_json()
+                if customer:
+                    customer.password_hash = data['password']
+                    db.session.commit()
+                    return make_response(customer.to_dict(), 200)
+                return make_response({"error": "account not found"}, 400)
+            except Exception as e:
+                db.session.rollback()
+                return make_response({"error": str(e)}, 422)
 
 
 

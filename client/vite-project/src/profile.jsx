@@ -70,7 +70,7 @@ const Profile = () => {
             <Button color="red" onClick={handleDeleteAccount}>
                 Delete Account
             </Button>
-            <ChangePassword />
+            <ChangePassword user={ user }/>
         </Container>
     );
 
@@ -79,7 +79,7 @@ const Profile = () => {
             {user ? userHTML : (
                 <>
                     <h2>Not a Member yet? Sign up:</h2>
-                    <Signup />
+                    <Signup user={ user }/>
                 </>
             )}
         </div>

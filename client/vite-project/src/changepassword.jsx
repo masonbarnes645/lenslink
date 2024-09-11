@@ -1,21 +1,92 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Modal, Button, Container, Grid, Form as SemanticForm, Input, Message } from 'semantic-ui-react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as yup from "yup";
+import { toast } from 'react-hot-toast'
+import { UserContext } from './usercontext';
 
 const initialValues = {
-    "current_password": "",
-    "password": ""
-}
+    current_password: "",
+    password: ""
+};
 
 const schema = yup.object().shape({
-    password: yup.string().required("Password is Required"),  
-    password: yup.string().required("Password is Required")
-  });
-const ChangePassword = ( ) => {
+    current_password: yup.string().required("Current password is required"),
+    password: yup.string().required("New password is required")
+});
+
+const ChangePassword = ({ user }) => {
     const [open, setOpen] = React.useState(false);
 
-    
+
+
+    const handleCustomerChange = (formData) => {
+        fetch(`/api/v1/customers/${user.id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                current_password: formData.current_password,
+                password: formData.password,
+            })
+        })
+            .then((res) => {
+                if (res.ok) {
+                    res.json().then((userObj) => {
+                        console.log(userObj);
+                        setOpen(false);
+                        toast.success("Password updated successfully");
+                    });
+                } else {
+                    return res.json().then((errorObj) => {
+                        toast.error(errorObj.error);
+                    });
+                }
+            })
+            .catch((error) => toast.error(error.message));
+    };
+
+    const handlePhotographerChange = (formData) => {
+        fetch(`/api/v1/photographers/${user.id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                current_password: formData.current_password,
+                password: formData.password,
+            })
+        })
+            .then((res) => {
+                if (res.ok) {
+                    res.json().then((userObj) => {
+                        console.log(userObj);
+                        setOpen(false);
+                        toast.success("Password updated successfully");
+                    });
+                } else {
+                    return res.json().then((errorObj) => {
+                        toast.error(errorObj.error);
+                    });
+                }
+            })
+            .catch((error) => toast.error(error.message));
+    };
+
+    const handleChangePassword = (formData, { setSubmitting }) => {
+        if (user.role === "customer") {
+            handleCustomerChange(formData);
+        }
+        else if (user.role === "photographer") {
+            handlePhotographerChange(formData);
+        }
+        else {
+            toast.error("Unknown role, unable to change password.");
+        }
+        setSubmitting(false);
+    };
+
     return (
         <Container>
             <Button onClick={() => setOpen(true)} primary>
@@ -33,9 +104,7 @@ const ChangePassword = ( ) => {
                     <Formik
                         initialValues={initialValues}
                         validationSchema={schema}
-                        onSubmit={async (values, actions) => {
-                            await handleFormSubmit(values, actions);
-                        }}
+                        onSubmit={handleChangePassword}
                     >
                         {({ isSubmitting }) => (
                             <Form>
@@ -51,7 +120,7 @@ const ChangePassword = ( ) => {
                                                     as={Input}
                                                     fluid
                                                 />
-                                                <ErrorMessage name="current_password" component={Message} negative />
+                                                <ErrorMessage name="current_password" component="div" className="ui error message" />
                                             </SemanticForm.Field>
                                         </Grid.Column>
                                     </Grid.Row>
@@ -66,7 +135,7 @@ const ChangePassword = ( ) => {
                                                     as={Input}
                                                     fluid
                                                 />
-                                                <ErrorMessage name="password" component={Message} negative />
+                                                <ErrorMessage name="password" component="div" className="ui error message" />
                                             </SemanticForm.Field>
                                         </Grid.Column>
                                     </Grid.Row>
