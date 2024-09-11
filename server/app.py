@@ -173,6 +173,20 @@ class PhotographerById(Resource):
         except Exception as e:
             db.session.rollback()
             return make_response({"error": str(e)}, 422)
+    def patch(self, id):
+        try:
+            photographer = db.session.get(Photographer, id)
+            data = request.get_json()
+            password = data.get('password')
+            if photographer and photographer.authenticate(password):
+                photographer.password_hash = data['password']
+                db.session.commit()
+                return make_response(photographer.to_dict(), 200)
+            return make_response({"error": "Incorrect current password"}, 400)
+        except Exception as e:
+            db.session.rollback()
+            return make_response({"error": str(e)}, 422)
+
         
 class CustomerById(Resource):
         def delete(self, id):
@@ -191,11 +205,12 @@ class CustomerById(Resource):
             try:
                 customer = db.session.get(Customer, id)
                 data = request.get_json()
-                if customer:
+                password = data.get("password")
+                if customer and customer.authenticate(password):
                     customer.password_hash = data['password']
                     db.session.commit()
                     return make_response(customer.to_dict(), 200)
-                return make_response({"error": "account not found"}, 400)
+                return make_response({"error": "Incorrect current password"}, 400)
             except Exception as e:
                 db.session.rollback()
                 return make_response({"error": str(e)}, 422)

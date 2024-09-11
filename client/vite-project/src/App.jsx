@@ -13,12 +13,13 @@ const App = () => {
   }
   useEffect(() => {
     google.accounts.id.initialize({
-      client_id: "149675200689-5hneg7c0ll7d3rti047vhhjpb3sl4ikh.apps.googleusercontent.com",
+      client_id: 
+        "149675200689-v4e6n63l8uf098kemu3mss77kgi6qhp4.apps.googleusercontent.com",
       callback: handleCallbackResponse
     })
     google.accounts.id.renderButton(
       document.getElementById("Oauth-div"),
-      { size: "large"}
+      { theme:"outline", size: "large"}
     )
     
   },[])
