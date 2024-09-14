@@ -17,6 +17,6 @@ class Booking(db.Model, SerializerMixin):
     
     customer = db.relationship("Customer", back_populates="bookings")
     photographer = db.relationship("Photographer", back_populates="bookings")
-    photos = db.relationship("Photo", back_populates="booking")
+    photos = db.relationship("Photograph", back_populates="booking")
 
     serialize_rules = ("-customer", "-photographer")

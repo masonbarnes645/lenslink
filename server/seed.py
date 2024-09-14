@@ -4,13 +4,15 @@ from werkzeug.security import generate_password_hash
 
 # Remote library imports
 from faker import Faker
+import random
 
-# # Local imports
+# Local imports
 from app import app, db
-from models.order import Order
-from models.order_item import OrderItem
-from models.user import User
-from models.product import Product
+from models.booking import Booking
+from models.customer import Customer
+from models.photo import Photograph
+from models.photographer import Photographer
+from models.review import Review
 
 fake = Faker()
 
@@ -18,172 +20,91 @@ fake = Faker()
 def seed_data():
     with app.app_context():
         # Delete old data
-        OrderItem.query.delete()
-        Order.query.delete()
-        Product.query.delete()
-        User.query.delete()
+        Booking.query.delete()
+        Customer.query.delete()
+        Photograph.query.delete()
+        Photographer.query.delete()
+        Review.query.delete()
 
-        # Create fake users
-        users = []
+        db.session.commit()  # Clear old data in the database
+
+        # Seed Customers
+        customers = []
         for _ in range(10):
-            user = User(
+            customer = Customer(
                 first_name=fake.first_name(),
                 last_name=fake.last_name(),
                 email=fake.unique.email(),
-                password_hash="password",
-                role_id=fake.random_element(
-                    elements=(User.ROLE_BUYER, User.ROLE_SELLER)
-                ),
+                _password_hash=generate_password_hash("password"),  # Use hashed password
                 created_at=fake.date_time_this_decade(),
             )
-            users.append(user)
-            db.session.add(user)
+            customers.append(customer)
+            db.session.add(customer)
 
         db.session.commit()
 
-        # Create fake products
-        coffee_pics = [
-            f"https://raw.githubusercontent.com/connorpage1/coffee-marketplace/main/client/public/coffee-pics/Coffee-{i}.webp"
-            for i in range(17)
-        ]
-
-        coffee_titles = [
-            "Ethiopian Yirgacheffe Light Roast",
-            "Sumatra Mandheling Dark Roast",
-            "Colombian Supremo Medium Roast",
-            "Jamaican Blue Mountain Reserve",
-            "Costa Rican Tarrazu Gourmet Coffee",
-            "Kenyan AA Single Origin",
-            "Brazilian Santos Coffee Beans",
-            "Guatemalan Antigua Shade Grown",
-            "Honduras Marcala Organic Coffee",
-            "Peruvian Chanchamayo Fair Trade",
-            "Papua New Guinea Sigri Estate",
-            "Nicaraguan Matagalpa Coffee",
-            "Tanzanian Peaberry Coffee",
-            "Mexican Chiapas Fair Trade",
-            "El Salvador Pacamara Micro Lot",
-            "Hawaiian Kona Extra Fancy",
-            "Sulawesi Toraja Coffee Beans",
-            "Rwanda Bourbon Coffee",
-            "Bolivian Yungas Organic Coffee",
-            "Malawi Mzuzu Coffee Cooperative",
-            "Panama Boquete Estate Coffee",
-            "Vietnamese Robusta Strong Roast",
-            "Indian Monsooned Malabar Coffee",
-            "Zambian AA Washed Coffee",
-            "Ugandan Bugisu Coffee",
-            "Yemeni Mocha Sanani Coffee",
-            "Dominican Republic Barahona Coffee",
-            "Zimbabwe AA Coffee Beans",
-            "Burundi Kayanza Bourbon Coffee",
-            "St. Helena Island Napoleon Coffee",
-            "Ecuadorian Galapagos Coffee",
-            "Haitian Blue Mountain Coffee",
-            "Cuban Serrano Superior Coffee",
-            "Laos Bolaven Plateau Coffee",
-            "Ivory Coast Robusta Coffee",
-            "Puerto Rican Yauco Selecto Coffee",
-            "Timor-Leste Maubisse Coffee",
-            "Galapagos San Cristobal Coffee",
-            "Java Estate Coffee Beans",
-            "Sulawesi Kalosi Coffee",
-            "Colombian Decaf Coffee",
-            "Organic Breakfast Blend Coffee",
-            "Espresso Italiano Dark Roast",
-            "French Vanilla Flavored Coffee",
-            "Caramel Macchiato Gourmet Coffee",
-            "Hazelnut Crème Coffee",
-            "Mocha Java Blend Coffee",
-            "Pumpkin Spice Seasonal Coffee",
-            "Chocolate Raspberry Coffee",
-        ]
-
-        tag_choices = [
-            "light roast",
-            "medium roast",
-            "dark roast",
-            "espresso",
-            "origin",
-            "flavor",
-            "washed processed",
-            "natural process",
-            "honey process",
-            "arabica",
-            "robusta",
-            "blend",
-            "organic",
-            "single-origin",
-            "black tea",
-            "green tea",
-            "white tea",
-            "herbal",
-            "rooibos",
-            "matcha",
-            "caffeine",
-            "decaf",
-        ]
-
-        products = []
-        for _ in range(20):
-            product = Product(
-                name=rc(coffee_titles),
-                stock=fake.random_int(min=0, max=100),
-                type=fake.random_element(elements=("coffee", "tea")),
-                sku=fake.unique.bothify(text="????######"),
-                image_url=rc(coffee_pics),
-                description=fake.sentence(80),
-                tag=rc(tag_choices),
-                price=fake.pyfloat(right_digits=2, positive=True, max_value=200),
-                user_id=fake.random_element(
-                    elements=[
-                        user.id for user in users if user.role_id == User.ROLE_SELLER
-                    ]
-                ),
+        # Seed Photographers
+        photographers = []
+        for _ in range(10):
+            photographer = Photographer(
+                first_name=fake.first_name(),
+                last_name=fake.last_name(),
+                email=fake.unique.email(),
+                _password_hash=generate_password_hash("password"),  # Use hashed password
                 created_at=fake.date_time_this_decade(),
             )
-            products.append(product)
-            db.session.add(product)
+            photographers.append(photographer)
+            db.session.add(photographer)
 
         db.session.commit()
 
-        # Create fake orders
-        orders = []
-        for _ in range(15):
-            order = Order(
-                total=fake.pyfloat(right_digits=2, positive=True, max_value=1000),
-                status=fake.random_element(
-                    elements=("pending", "ordered", "shipped", "delivered")
-                ),
-                discount=fake.pyfloat(right_digits=2, positive=True, max_value=0.99),
-                user_id=fake.random_element(
-                    elements=[
-                        user.id for user in users if user.role_id == User.ROLE_BUYER
-                    ]
-                ),
-                order_date=fake.date_time_this_decade(),
+        # Seed Bookings
+        bookings = []
+        for _ in range(10):
+            booking = Booking(
+                customer_id=random.choice(customers).id,  # Randomly select a customer ID
+                photographer_id=random.choice(photographers).id,  # Randomly select a photographer ID
+                session_length=random.uniform(1.0, 5.0),  # Generate a random session length
+                booking_date=fake.date_this_year(),  # Generate a random date
+                booking_time=random.uniform(8.0, 18.0),  # Random time between 8 AM and 6 PM
+                location=fake.city(),  # Generate a random city location
+                created_at=fake.date_time_this_decade(),
             )
-            orders.append(order)
-        db.session.add_all(orders)
+            bookings.append(booking)
+            db.session.add(booking)
 
         db.session.commit()
 
-        # Create fake order items
-        for order in orders:
-            num_items = fake.random_int(min=1, max=5)
-            for _ in range(num_items):
-                order_item = OrderItem(
-                    quantity=fake.random_int(min=1, max=10),
-                    price_at_order=fake.random_element(
-                        elements=[product.price for product in products]
-                    ),
-                    order_id=order.id,
-                    product_id=fake.random_element(
-                        elements=[product.id for product in products]
-                    ),
-                    created_at=fake.date_time_this_decade(),
-                )
-                db.session.add(order_item)
+        # Seed Photographs
+        photographs = []
+        for _ in range(50):
+            photograph = Photograph(
+                booking_id=random.choice(bookings).id,  # Randomly select a booking ID
+                photographer_id=random.choice(photographers).id,  # Randomly select a photographer ID
+                image_url=fake.unique.image_url(),  # Ensure unique image URL
+                title=fake.sentence(nb_words=3),  # Generate a random title
+                description=fake.sentence(),  # Generate a random description
+            )
+            photographs.append(photograph)
+            db.session.add(photograph)
+
+        db.session.commit()
+
+        # Seed Reviews
+        customers = Customer.query.all()  # Fetch all customers
+        photographers = Photographer.query.all()  # Fetch all photographers
+
+        reviews = []
+        for _ in range(10):
+            review = Review(
+                customer_id=random.choice(customers).id,  # Randomly select a customer ID
+                photographer_id=random.choice(photographers).id,  # Randomly select a photographer ID
+                rating=random.randint(0, 5),  # Rating between 0 and 5
+                body=fake.text(max_nb_chars=500),  # Random body text, max 500 characters
+                created_at=fake.date_time_this_decade(),
+            )
+            reviews.append(review)
+            db.session.add(review)
 
         db.session.commit()
 
