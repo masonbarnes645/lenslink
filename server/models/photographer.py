@@ -15,6 +15,7 @@ class Photographer(db.Model, SerializerMixin):
 
     reviews = db.relationship("Review", back_populates="photographer")
     bookings = db.relationship("Booking", back_populates="photographer")
+    photos = db.relationship("Photo", back_populates="photographer")
 
     def __init__(self, email, password=None, **kwargs):
         super().__init__(email=email, **kwargs)
