@@ -1,13 +1,15 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from './usercontext';
 import Signup from "./signup";
 import Bslate from "./bookingslate";
-import { Container, Grid, Button } from "semantic-ui-react";
+import { Container, Grid, Button, Confirm } from "semantic-ui-react";
 import ChangePassword from "./changepassword";
 
 const Profile = () => {
     const { user } = useContext(UserContext);
+    const [open, setOpen] = useState(false)
     
+    const show = () => {setOpen(true)}
 
     const handleDeleteCustomer = () => {
         fetch(`/api/v1/customers/${user.id}`, {
@@ -53,6 +55,8 @@ const Profile = () => {
         }
     };
 
+
+
     const userHTML = (
         <Container>
             <h1>My Bookings</h1>
@@ -67,9 +71,13 @@ const Profile = () => {
                     <h2>No bookings found</h2>
                 )}
             </Grid>
-            <Button color="red" onClick={handleDeleteAccount}>
+            <Button color="red" onClick={show}>
                 Delete Account
             </Button>
+            <Confirm
+                open={open}
+                onCancel={() => setOpen(false)}
+                onConfirm={handleDeleteAccount} />
             <ChangePassword user={ user }/>
         </Container>
     );
