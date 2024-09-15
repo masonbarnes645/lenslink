@@ -22,7 +22,7 @@ const CustomerSignUp = () => {
     const [open, setOpen] = React.useState(false);
 
     const handleFormSubmit = (formData, { setSubmitting }) => {
-        fetch("http://localhost:5555/api/v1/signup", {
+        fetch("/api/v1/signup", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

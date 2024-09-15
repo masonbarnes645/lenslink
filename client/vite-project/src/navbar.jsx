@@ -1,15 +1,12 @@
 import { useContext, useEffect } from "react";
 import { UserContext } from './usercontext';
 import { Menu } from "semantic-ui-react";
-import { Link } from "react-router-dom";
-
-
-import toast from "react-hot-toast";
-import Login from "./login";
+import { Link, useNavigate } from "react-router-dom";
 
 
 function NavBar() {
   const { user, setUser } = useContext(UserContext);
+  const navigate = useNavigate()
 
 
   const handleLogout = () => {
@@ -18,6 +15,8 @@ function NavBar() {
     }).then((res) => {
       if (res.status == 204) {
         setUser(null);
+        navigate('/')
+
       }
     });
   };

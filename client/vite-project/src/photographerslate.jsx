@@ -1,6 +1,6 @@
 import { Grid } from "semantic-ui-react"
 import { Link, NavLink } from "react-router-dom"
-
+import './App.css'
 
 const PSlate = ({ first_name, last_name, id, photos }) => {
 
@@ -15,11 +15,16 @@ const PSlate = ({ first_name, last_name, id, photos }) => {
                     textDecoration: 'none' // Optional: removes underline from links
                 })}
             > See More</NavLink>
-            <Grid columns={5} doubling stackable>
+            <Grid columns={1} doubling stackable>
                 {photos.length > 0 ? (
                     photos.map((photo) => (
                         <Grid.Column key={photo.id}>
-                            <img src={photo.image_url} />
+                            <img 
+                            className="slate-photo"
+                            src={photo.image_url}
+                            alt={photo.title}
+                            
+                            />
                         </Grid.Column>
                     ))
                 ) : (
