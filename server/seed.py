@@ -74,7 +74,7 @@ def seed_data():
 
 
         photographs = []
-        for _ in range(50):
+        for _ in range(250):
             photograph = Photograph(
                 booking_id=random.choice(bookings).id, 
                 photographer_id=random.choice(photographers).id,  

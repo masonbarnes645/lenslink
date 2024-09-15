@@ -12,10 +12,10 @@ const PSlate = ({ first_name, last_name, id, photos }) => {
                 to={`/photographers/${id}`}
                 style={({ isActive }) => ({
                     fontWeight: isActive ? 'bold' : 'normal',
-                    textDecoration: 'none' // Optional: removes underline from links
+                    textDecoration: 'none'
                 })}
-            > See More</NavLink>
-            <Grid columns={1} doubling stackable>
+            > See More Pictures From {first_name}</NavLink>
+            <Grid className="photo-slate">
                 {photos.length > 0 ? (
                     photos.map((photo) => (
                         <Grid.Column key={photo.id}>
