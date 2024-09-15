@@ -1,7 +1,7 @@
 from models.__init__ import SerializerMixin, validates, db, re
 
 
-class Review(db.Model):
+class Review(db.Model, SerializerMixin):
     __tablename__ = "reviews"
     
     id = db.Column(db.Integer, primary_key=True)
@@ -13,6 +13,10 @@ class Review(db.Model):
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
 
     photographer = db.relationship("Photographer", back_populates="reviews")
+    customer = db.relationship("Customer", back_populates="reviews")
+
+
+    serialize_rules = ("-photographer", "-customer")
 
 
 

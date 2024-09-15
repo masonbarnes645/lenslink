@@ -14,6 +14,7 @@ class Customer(db.Model, SerializerMixin):
 
 
     bookings = db.relationship("Booking", back_populates="customer")
+    reviews = db.relationship("Review", back_populates="customer")
 
     def __init__(self, email, password=None, **kwargs):
         super().__init__(email=email, **kwargs)

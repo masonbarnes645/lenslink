@@ -6,7 +6,7 @@ import PSlate from "./photographerslate";
 const Photographers = () =>{
     const [photographers, setPhotographers] = useState([])
     useEffect(() => {
-        fetch(`http://localhost:5555/api/v1/photographers`)
+        fetch(`/api/v1/photographers`)
           .then((resp) => {
             if (resp.ok) {
               resp.json().then(setPhotographers);
