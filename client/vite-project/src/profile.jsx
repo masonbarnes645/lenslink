@@ -4,10 +4,12 @@ import Signup from "./signup";
 import Bslate from "./bookingslate";
 import { Container, Grid, Button, Confirm } from "semantic-ui-react";
 import ChangePassword from "./changepassword";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
     const { user } = useContext(UserContext);
     const [open, setOpen] = useState(false)
+    const navigate = useNavigate()
     
     const show = () => {setOpen(true)}
 
@@ -35,7 +37,6 @@ const Profile = () => {
         .then((res) => {
             if (res.ok) {
                 toast.success("Account Deleted");
-                navigate('/');
             } else {
                 return res.json().then((errorObj) => {
                     toast.error(errorObj.error);
@@ -48,8 +49,10 @@ const Profile = () => {
     const handleDeleteAccount = () => {
         if (user.role === "customer") {
             handleDeleteCustomer();
+            navigate('/')
         } else if (user.role === "photographer") {
             handleDeletePhotographer();
+            navigate('/')
         } else {
             toast.error("Unknown role, unable to delete account.");
         }
