@@ -233,7 +233,15 @@ class Bookings(Resource):
             return make_response({"error": str(e)}, 400)
         
 
-        
+class BookingById(Resource):
+    def get(self, id):
+        try:
+            booking = db.session.get(Booking, id)
+            if booking:
+                return make_response(booking.to_dict(), 200 )
+            return make_response({"error": str(e)}, 404)
+        except Exception as e:
+            return make_response({"error": str(e)}, 400)
 
 api.add_resource(PhotoById, "/photographs/<int:id>")
 api.add_resource(Photos, "/photographs")
@@ -245,6 +253,7 @@ api.add_resource(Login, "/login")
 api.add_resource(CheckSession, "/check-session")
 api.add_resource(Logout,"/logout")
 api.add_resource(Bookings, "/bookings")
+api.add_resource(BookingById, "/bookings/<int:id>")
 
 
 if __name__ == "__main__":

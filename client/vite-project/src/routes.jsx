@@ -6,6 +6,7 @@ import Photographers from "./browsephotographers";
 import Login from "./login";
 import PhotographerDetails from "./photographerdetails";
 import Profile from "./profile";
+import BookingDetails from "./bookingdetails";
 
 export const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ export const router = createBrowserRouter([
       {
         path:"/myprofile",
         element: <Profile />
+      },
+      {
+        path: "/bookings/:bookingId",
+        element: <BookingDetails />
       }
     ],
   },
