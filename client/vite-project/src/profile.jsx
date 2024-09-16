@@ -85,6 +85,11 @@ const Profile = () => {
         </Container>
     );
 
+
+    // const photographerHTML = (
+        
+    // )
+
     return (
         <div>
             {user ? userHTML : (

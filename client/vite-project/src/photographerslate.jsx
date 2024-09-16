@@ -28,7 +28,7 @@ const PSlate = ({ first_name, last_name, id, photos }) => {
                         </Grid.Column>
                     ))
                 ) : (
-                    <h2>No photographers</h2>
+                    <h2>No Photos</h2>
                 )}
             </Grid>
         </div>
