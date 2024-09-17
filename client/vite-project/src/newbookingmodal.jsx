@@ -30,7 +30,7 @@ const NewBooking = ({ photographerId }) =>{
     const [open, setOpen] = React.useState(false);
     const { user } = useContext(UserContext)
     const handleFormSubmit = (formData, { setSubmitting }) => {
-        fetch("http://localhost:5555/api/v1/bookings", {
+        fetch("/api/v1/bookings", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

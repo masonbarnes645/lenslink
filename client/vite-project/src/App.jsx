@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import { Outlet } from 'react-router-dom';
-import { UserProvider } from './usercontext'; 
-import NavBar from './navbar'; 
+import { UserProvider } from './usercontext';
+import NavBar from './navbar';
 import { useEffect } from 'react';
+import { Toaster } from "react-hot-toast";
 
 const App = () => {
 
@@ -10,7 +11,7 @@ const App = () => {
 
   const handleCallbackResponse = async (res) => {
     const token = res.credential;
-  
+
     try {
       const response = await fetch('/api/v1/auth/google', {
         method: 'POST',
@@ -19,11 +20,11 @@ const App = () => {
         },
         body: JSON.stringify({ id_token: token }),
       });
-  
+
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-  
+
       const data = await response.json();
       console.log('Backend response:', data);
 
@@ -41,7 +42,7 @@ const App = () => {
   //     document.getElementById("Oauth-div"),
   //     { theme:"outline", size: "large"}
   //   )
-    
+
   // },[])
 
   const initializeGoogleSignIn = () => {
@@ -74,13 +75,13 @@ const App = () => {
     loadGoogleScript().then(() => {
       initializeGoogleSignIn();
     })
-    .then(() => {
-      window.google.accounts.id.renderButton(
-        document.getElementById("signInDiv"),
-        {theme: 'outline', size: 'large'}
-      )
-  
-    });
+      .then(() => {
+        window.google.accounts.id.renderButton(
+          document.getElementById("signInDiv"),
+          { theme: 'outline', size: 'large' }
+        )
+
+      });
   }, []);
 
   // useEffect(() => {
@@ -95,6 +96,9 @@ const App = () => {
   return (
     <UserProvider>
       <div className="app">
+        <Toaster
+          position='top-left'
+        />
         <header>
           <NavBar />
           <div id='signInDiv'></div>

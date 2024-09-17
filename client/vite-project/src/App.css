@@ -11,3 +11,18 @@
   overflow-x: auto;
 
 }
+
+.sign-up-modal {
+  top: 20%;
+  left: 30%;
+  background-color: blue;
+  width: 600px;
+  position:absolute;
+  text-align: center;
+
+}
+
+.sign-up-header{
+  background-color: aliceblue;
+  color: black;
+}

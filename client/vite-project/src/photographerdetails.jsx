@@ -55,5 +55,4 @@ const PhotographerDetails = () => {
 
 export default PhotographerDetails
 
-// create booking details (for customers) /bookings post
-// photographer by id route fetch call
+

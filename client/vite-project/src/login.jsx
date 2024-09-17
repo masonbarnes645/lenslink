@@ -34,6 +34,7 @@ const Login = () => {
                 if (resp.ok) {
                     resp.json().then((data) => {
                         setUser(data)
+                        toast.success("Logged In!")
                     });
                 } else {
                     return resp.json().then((errorObj) => {

@@ -18,8 +18,8 @@ const schema = yup.object().shape({
     password: yup.string().required("Password is Required")
 });
 
-const CustomerSignUp = () => {
-    const [open, setOpen] = React.useState(false);
+const CustomerSignUp = ({ open, onClose }) => {
+
 
     const handleFormSubmit = (formData, { setSubmitting }) => {
         fetch("/api/v1/signup", {
@@ -55,13 +55,11 @@ const CustomerSignUp = () => {
 
     return (
         <div>
-            <Button onClick={() => setOpen(true)} primary>
-                Customer
-            </Button>
+
 
             <Modal
-                onClose={() => setOpen(false)}
-                onOpen={() => setOpen(true)}
+                onClose={onClose}
+                onOpen={open}
                 open={open}
                 dimmer='blurring'
                 size='large'
@@ -154,7 +152,7 @@ const CustomerSignUp = () => {
                     </Container>
                 </Modal.Content>
                 <Modal.Actions>
-                    <Button color="black" onClick={() => setOpen(false)}>
+                    <Button color="black" onClick={onClose}>
                         Cancel
                     </Button>
                 </Modal.Actions>

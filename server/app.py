@@ -1,10 +1,10 @@
 # Remote library imports
 from flask import request, make_response, session
 from flask_restful import Resource
+# from dotenv import load_dotenv
 import os
 from datetime import datetime
-from functools import wraps
-
+# from requests import request
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 DATABASE = os.environ.get("DB_URI", f"sqlite:///{os.path.join(BASE_DIR, 'app.db')}")
@@ -16,7 +16,7 @@ from models.customer import Customer
 from models.photo import Photograph
 from models.photographer import Photographer
 from models.review import Review
-
+# load_dotenv()
 
 class PhotoById(Resource):
     def get(self, id):
@@ -243,6 +243,37 @@ class BookingById(Resource):
         except Exception as e:
             return make_response({"error": str(e)}, 400)
 
+# class Google(Resource):
+#     def authenticate_google():
+#         data = request.json
+#         id_token = data.get('id_token')
+        
+
+#         CLIENT_ID = '149675200689-v4e6n63l8uf098kemu3mss77kgi6qhp4.apps.googleusercontent.com'
+
+#         try:
+#             response = requests.get(
+#                 f'https://www.googleapis.com/oauth2/v3/tokeninfo?id_token={id_token}'
+#             )
+#             response.raise_for_status()
+#             token_info = response.json()
+
+#             if token_info['aud'] != CLIENT_ID:
+#                 return ({'error': 'Invalid token'}), 401
+
+
+#             user = {
+#                 'sub': token_info['sub'],
+#                 'name': token_info.get('name'),
+#                 'email': token_info.get('email')
+#             }
+
+#             return ({'user': user}), 200
+
+#         except Exception as e:
+#             return ({'error': str(e)}), 500
+
+
 api.add_resource(PhotoById, "/photographs/<int:id>")
 api.add_resource(Photos, "/photographs")
 api.add_resource(Signup, "/signup")
@@ -254,7 +285,7 @@ api.add_resource(CheckSession, "/check-session")
 api.add_resource(Logout,"/logout")
 api.add_resource(Bookings, "/bookings")
 api.add_resource(BookingById, "/bookings/<int:id>")
-
+# api.add_resource(Google, "/api/v1/auth/google")
 
 if __name__ == "__main__":
     app.run(port=5555, debug=True)

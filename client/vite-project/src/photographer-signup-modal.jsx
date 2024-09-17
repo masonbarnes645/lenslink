@@ -10,6 +10,8 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as yup from "yup";
 import React from 'react';
 import toast from "react-hot-toast";
+import './App.css'
+
 
 
 const schema = yup.object().shape({
@@ -19,12 +21,12 @@ const schema = yup.object().shape({
   password: yup.string().required("Password is Required")
 });
 
-const PhotographerSignUp = () => {
-  const [open, setOpen] = React.useState(false);
+const PhotographerSignUp = ({ open, onClose}) => {
+
 
 
   const handleFormSubmit = (formData, { setSubmitting }) => {
-    fetch("http://localhost:5555/api/v1/signup", {
+    fetch("/api/v1/signup", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -57,19 +59,16 @@ const PhotographerSignUp = () => {
 
 
   return (
-    <div>
-      <Button onClick={() => setOpen(true)} primary>
-        Photographer
-      </Button>
+    <div >
+
 
       <Modal
-        onClose={() => setOpen(false)}
+        onClose={onClose}
         onOpen={() => setOpen(true)}
         open={open}
-        dimmer='blurring'
-        size='large'
+        className='sign-up-modal'
       >
-        <Modal.Header>Sign Up as Photographer</Modal.Header>
+        <Modal.Header className='sign-up-header'>Sign Up as Photographer</Modal.Header>
 
         <Modal.Content>
           <Container text>
@@ -158,7 +157,7 @@ const PhotographerSignUp = () => {
           </Container>
         </Modal.Content>
         <Modal.Actions>
-          <Button color="black" onClick={() => setOpen(false)}>
+          <Button color="black" onClick={onClose}>
             Cancel
           </Button>
         </Modal.Actions>

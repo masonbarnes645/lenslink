@@ -2,6 +2,7 @@ import { useContext, useEffect } from "react";
 import { UserContext } from './usercontext';
 import { Menu } from "semantic-ui-react";
 import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 
 function NavBar() {
@@ -13,11 +14,19 @@ function NavBar() {
     fetch("/api/v1/logout", {
       method: "DELETE",
     }).then((res) => {
-      if (res.status == 204) {
+      if (res.status === 204) {
         setUser(null);
-        navigate('/')
-
+        navigate('/');
+        toast("Log Out Successful!", {
+          icon: '👋',
+        });
+      } else {
+        res.json().then((errorObj) => {
+          toast.error(errorObj.error);
+        });
       }
+    }).catch((error) => {
+      toast.error("An error occurred while logging out.");
     });
   };
 
