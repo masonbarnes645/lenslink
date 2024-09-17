@@ -63,8 +63,9 @@ const CustomerSignUp = ({ open, onClose }) => {
                 open={open}
                 dimmer='blurring'
                 size='large'
+                className='sign-up-modal'
             >
-                <Modal.Header>Sign Up as Customer</Modal.Header>
+                <Modal.Header className='sign-up-header'>Sign Up as Customer</Modal.Header>
 
                 <Modal.Content>
                     <Container text>
