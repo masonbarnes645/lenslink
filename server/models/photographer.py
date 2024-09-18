@@ -48,3 +48,10 @@ class Photographer(db.Model, SerializerMixin):
         elif not re.match(r"^[\w\.-]+@([\w]+\.)+[\w-]{2,}$", email):
             raise ValueError("Email must be in a proper format")
         return email
+    @validates("first_name", "last_name")
+    def validate_name(self, key, value):
+        if not isinstance(value, str):
+            raise TypeError(f"{key.replace('_', ' ').capitalize()} must be a string")
+        if not (2 <= len(value) <= 30):
+            raise ValueError(f"{key.replace('_', ' ').capitalize()} must be between 2 and 30 characters")
+        return value
