@@ -18,7 +18,7 @@ const Profile = () => {
             method: "DELETE",
         })
         .then((res) => {
-            if (res.ok) {
+            if (res.status == 204) {
                 toast.success("Account Deleted");
                 navigate('/');
             } else {
@@ -86,9 +86,6 @@ const Profile = () => {
     );
 
 
-    // const photographerHTML = (
-        
-    // )
 
     return (
         <div>

@@ -2,7 +2,9 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { UserContext } from "./usercontext";
 import NewBooking from "./newbookingmodal";
-import { Grid } from "semantic-ui-react";
+import { Container, Grid } from "semantic-ui-react";
+import './App.css'
+
 
 const PhotographerDetails = () => {
   const { photographerId } = useParams();
@@ -29,10 +31,10 @@ const PhotographerDetails = () => {
 
   if (photographer)
     return (
-      <div>
+      <Container>
         <h1>{photographer.first_name}</h1>
         <NewBooking photographerId={photographerId} />
-        <Grid className="photo-slate">
+        <Grid className="photographer-detail-grid">
           {photographer.photos.length > 0 ? (
             photographer.photos.map((photo) => (
               <Grid.Column key={photo.id}>
@@ -45,11 +47,13 @@ const PhotographerDetails = () => {
               </Grid.Column>
             ))
           ) : (
+            <Grid.Column>
             <h2>No photographers</h2>
+            </Grid.Column>
           )}
         </Grid>
 
-      </div>
+      </Container>
     )
 }
 

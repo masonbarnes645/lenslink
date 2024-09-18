@@ -46,6 +46,7 @@ const NewBooking = ({ photographerId }) =>{
             .then((resp) => {
                 if (resp.ok) {
                     return resp.json().then((data) => {
+                        
                         navigate(`/profile`);
                         setOpen(false); 
                     });
@@ -62,7 +63,7 @@ const NewBooking = ({ photographerId }) =>{
     };
   return( 
    <div>
-    <Button onClick={() => setOpen(true)} primary>
+    <Button onClick={() => setOpen(true)} primary className='top-button'>
         New Booking
     </Button>
 
