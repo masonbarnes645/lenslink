@@ -1,6 +1,6 @@
 import PhotographerSignUp from "./photographer-signup-modal"
 import CustomerSignUp from "./customer-signup-modal"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "semantic-ui-react";
 
 const Signup = () => {
@@ -9,7 +9,6 @@ const Signup = () => {
     const openCustomerModal = () => setOpenModal('customer');
     const openPhotographerModal = () => setOpenModal('photographer');
     const closeModal = () => setOpenModal(null);
-    
     
     return (
         <div>

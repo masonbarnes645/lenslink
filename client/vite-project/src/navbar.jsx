@@ -3,6 +3,8 @@ import { UserContext } from './usercontext';
 import { Menu } from "semantic-ui-react";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import './App.css'
+
 
 
 function NavBar() {
@@ -30,11 +32,12 @@ function NavBar() {
     });
   };
 
+  
 
   return (
-    <>
-      <div className="ui top fixed menu">
-        <Menu fixed="top" inverted>
+    
+      <div className="ui-top-fixed-menu">
+        <Menu className="nav-menu">
           <Menu.Item as={Link} to="/" header>
             {" "}
             Home{" "}
@@ -43,7 +46,7 @@ function NavBar() {
             {" "}
             Photographers{" "}
           </Menu.Item>
-  
+
           {user ? (
             <>
               <Menu.Item as={Link} to="/myprofile" header>
@@ -69,7 +72,7 @@ function NavBar() {
           )}
         </Menu>
       </div>
-    </>
+    
   );
 }
 

@@ -26,3 +26,128 @@
   background-color: aliceblue;
   color: black;
 }
+
+.app{
+  background-color: #1FE593;
+  display: flex;
+  align-items: center;
+}
+
+#signInDiv{
+  width: 200px;
+}
+
+
+.ui-top-fixed-menu {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: #24362F;
+  height: 60px; /* Navbar height */
+  display: flex;
+  flex-direction: row; /* Align items horizontally */
+  align-items: center; /* Vertically centers items in the navbar */
+  justify-content: space-between; /* Adds space between left and right nav items */
+  padding: 0 20px; /* Padding to keep content from touching the edges */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional shadow for aesthetics */
+}
+
+.nav-menu {
+  display: flex;
+  flex-direction: row; /* Ensure links are aligned in a row */
+}
+
+.nav-menu a {
+  color: #2E8C6B;
+  padding-right: 40px;
+  padding-left: 40px;
+  text-decoration: none; /* Remove underline */
+  font-size: 1.1rem; /* Adjust font size */
+}
+.landing-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    padding: 20px;
+}
+
+#landing-photo {
+    width: 40%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.content-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-left: 40px;
+    max-width: 50%;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.website-name {
+    font-size: 2.5rem;
+    margin: 0;
+}
+
+.blurb {
+    font-size: 1.2rem;
+    margin: 20px 0;
+}
+
+.button-container {
+    display: flex;
+    gap: 15px;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.right-button {
+    background-color: #28a745;
+}
+
+.right-button:hover {
+    background-color: #218838;
+}
+
+.left-button {
+    background-color: #ffc107;
+}
+
+.left-button:hover {
+    background-color: #e0a800;
+}
+
+.top-button {
+    background-color: #17a2b8;
+}
+
+.top-button:hover {
+    background-color: #138496;
+}
