@@ -253,7 +253,7 @@ def send_signup_email(user_email):
     msg = Message('Welcome to LensLink!',
                   sender='lenslinkoutreach@gmail.com',
                   recipients=[user_email])
-    msg.body = 'Thank you for sign up with us for LensLink, the premier platform for connecting you with the ideal photographer'
+    msg.body = 'Thank you for signing up with us for LensLink, the premier platform for connecting you with the ideal photographer for any occasion'
     with app.app_context():
         mail.send(msg)
 
@@ -268,7 +268,7 @@ api.add_resource(CheckSession, "/check-session")
 api.add_resource(Logout,"/logout")
 api.add_resource(Bookings, "/bookings")
 api.add_resource(BookingById, "/bookings/<int:id>")
-# api.add_resource(Google, "/api/v1/auth/google")
+
 
 if __name__ == "__main__":
     app.run(port=5555, debug=True)

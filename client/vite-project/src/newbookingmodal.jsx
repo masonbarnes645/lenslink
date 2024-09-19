@@ -76,7 +76,7 @@ const NewBooking = ({ photographerId, name }) =>{
         className='sign-up-modal'
 
     >
-        <Modal.Header className='sign-up-header'>Add a New Booking</Modal.Header>
+        <Modal.Header className='sign-up-header'>Book a Session</Modal.Header>
 
         <Modal.Content>
             <Container text>
@@ -134,7 +134,7 @@ const NewBooking = ({ photographerId, name }) =>{
                                 min="08:00"  
                                 max="20:00" 
                             />
-                            <ErrorMessage name="booking_date" component={Message} negative />
+                            <ErrorMessage name="booking_time" component={Message} negative />
                         </SemanticForm.Field>
                     </Grid.Column>
                 </Grid.Row>
