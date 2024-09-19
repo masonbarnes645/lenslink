@@ -231,3 +231,7 @@ button:hover {
   padding-top: 50px;
 }
 
+.profile-container{
+  padding-left: 800px;
+  align-items: center;
+}

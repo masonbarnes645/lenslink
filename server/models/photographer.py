@@ -18,7 +18,7 @@ class Photographer(db.Model, SerializerMixin):
     photos = db.relationship("Photograph", back_populates="photographer")
 
 
-    serialize_rules = ("-_password_hash","-reviews", "-bookings")
+    serialize_rules = ("-_password_hash","-reviews")
 
 
     def __init__(self, email, password=None, **kwargs):

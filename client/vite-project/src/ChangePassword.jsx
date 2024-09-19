@@ -89,7 +89,7 @@ const ChangePassword = ({ user }) => {
 
     return (
         <Container>
-            <Button onClick={() => setOpen(true)} primary>
+            <Button onClick={() => setOpen(true)} primary className="SU-modal-button">
                 Change Password
             </Button>
             <Modal

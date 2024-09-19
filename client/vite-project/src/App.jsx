@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import { UserProvider } from './usercontext'; 
-import NavBar from './navbar';
+import NavBar from './NavBar';
 import { Toaster } from 'react-hot-toast';
 
 const App = () => {

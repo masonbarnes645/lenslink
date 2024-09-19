@@ -222,6 +222,15 @@ class CustomerById(Resource):
             except Exception as e:
                 db.session.rollback()
                 return make_response({"error": str(e)}, 422)
+        def get(self, id):
+            try:
+                customer = db.session.get(Customer, id)
+                if customer:
+                    return make_response(customer.to_dict(), 200 )
+                return make_response({"error": str(e)}, 404)
+            except Exception as e:
+                return make_response({"error": str(e)}, 400)
+
 
 
 

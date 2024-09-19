@@ -61,7 +61,7 @@ const Profile = () => {
 
 
     const userHTML = (
-        <Container>
+        <Container className="profile-container">
             <h1>My Bookings</h1>
             <Grid columns={5} doubling stackable>
                 {user && user.bookings && user.bookings.length > 0 ? (
@@ -74,7 +74,7 @@ const Profile = () => {
                     <h2>No bookings found</h2>
                 )}
             </Grid>
-            <Button color="red" onClick={show}>
+            <Button color="red" onClick={show} className="SU-modal-button">
                 Delete Account
             </Button>
             <Confirm

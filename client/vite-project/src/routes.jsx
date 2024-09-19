@@ -1,12 +1,12 @@
 import App from "./App";
-import Signup from "./signup";
-import Landing from "./landing";
+import Signup from "./Signup";
+import Landing from "./Landing";
 import { createBrowserRouter } from "react-router-dom";
-import Photographers from "./browsephotographers";
-import Login from "./login";
-import PhotographerDetails from "./photographerdetails";
-import Profile from "./profile";
-import BookingDetails from "./bookingdetails";
+import Photographers from "./BrowsePhotographers";
+import Login from "./Login";
+import PhotographerDetails from "./PhotographerDetails";
+import Profile from "./Profile";
+import BookingDetails from "./BookingDetails";
 
 export const router = createBrowserRouter([
   {

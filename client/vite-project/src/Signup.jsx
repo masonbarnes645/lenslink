@@ -38,4 +38,3 @@ export default Signup
 
 
 
-// state for which one is open
