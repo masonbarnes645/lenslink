@@ -1,5 +1,5 @@
-import PhotographerSignUp from "./photographer-signup-modal"
-import CustomerSignUp from "./customer-signup-modal"
+import PhotographerSignUp from "./PhotographerSignupModal"
+import CustomerSignUp from "./CustomerSignupModal"
 import { useEffect, useState } from "react";
 import { Button } from "semantic-ui-react";
 import './App.css'

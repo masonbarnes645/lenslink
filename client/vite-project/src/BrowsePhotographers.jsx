@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import toast from "react-hot-toast";
 import { Container, Grid } from "semantic-ui-react";
-import PSlate from "./photographerslate";
+import PSlate from "./PhotographerSlate";
 
 const Photographers = () =>{
     const [photographers, setPhotographers] = useState([])
@@ -18,8 +18,7 @@ const Photographers = () =>{
       },[]);
 
     return(
-    <Container>
-    <h1>photographers.</h1>
+    <Container className="browse-photographers">
     <Grid columns={5} doubling stackable>
           {photographers.length > 0 ? (
             photographers.map((photographer) => (

@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { UserContext } from "./usercontext";
-import NewBooking from "./newbookingmodal";
+import NewBooking from "./NewBookingModal";
 import { Container, Grid } from "semantic-ui-react";
 import './App.css'
 

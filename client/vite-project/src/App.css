@@ -1,8 +1,9 @@
 
 .slate-photo {
-  height: 200px;
-  width: 200px;
-  margin-right: 20px;
+  height: 400px;
+  width: 300px;
+  margin-right: 50px;
+  margin-left: 50px;
 }
 
 .photo-slate {
@@ -224,5 +225,9 @@ button:hover {
   margin-top: 20px ;
   margin-bottom: 10px;
   
+}
+
+.browse-photographers{
+  padding-top: 50px;
 }
 

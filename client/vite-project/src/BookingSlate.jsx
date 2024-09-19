@@ -1,6 +1,7 @@
+import { NavLink } from "react-router-dom"
 
 
-const Bslate = ({ booking_date, booking_time, location, photographer }) => {
+const Bslate = ({ booking_date, booking_time, location, photographer, id }) => {
 
     return (
         <div>

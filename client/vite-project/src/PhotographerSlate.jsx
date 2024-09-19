@@ -17,7 +17,7 @@ const PSlate = ({ first_name, last_name, id, photos }) => {
             > See More Pictures From {first_name}</NavLink>
             <Grid className="photo-slate">
                 {photos.length > 0 ? (
-                    photos.map((photo) => (
+                    photos.slice(0,5).map((photo) => (
                         <Grid.Column key={photo.id}>
                             <img 
                             className="slate-photo"

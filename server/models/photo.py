@@ -8,7 +8,7 @@ class Photograph(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     booking_id = db.Column(db.Integer, db.ForeignKey('bookings.id'))
     photographer_id = db.Column(db.Integer, db.ForeignKey('photographers.id'))
-    image_url = db.Column(db.String, unique=True)
+    image_url = db.Column(db.String)
     title = db.Column(db.String)
     description = db.Column(db.String)
     created_at = db.Column(db.DateTime, server_default=db.func.now())

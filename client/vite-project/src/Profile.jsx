@@ -1,9 +1,9 @@
 import { useContext, useState } from "react";
 import { UserContext } from './usercontext';
-import Signup from "./signup";
-import Bslate from "./bookingslate";
+import Signup from "./Signup";
+import Bslate from "./BookingSlate";
 import { Container, Grid, Button, Confirm } from "semantic-ui-react";
-import ChangePassword from "./changepassword";
+import ChangePassword from "./ChangePassword";
 import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
@@ -58,7 +58,6 @@ const Profile = () => {
             toast.error("Unknown role, unable to delete account.");
         }
     };
-
 
 
     const userHTML = (
