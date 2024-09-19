@@ -51,4 +51,7 @@ class Customer(db.Model, SerializerMixin):
             raise TypeError(f"{key.replace('_', ' ').capitalize()} must be a string")
         if not (2 <= len(value) <= 30):
             raise ValueError(f"{key.replace('_', ' ').capitalize()} must be between 2 and 30 characters")
+        if not re.match(r'^[A-Za-z]+$', value):
+            raise ValueError(f"{key.replace('_', ' ').capitalize()} can only contain letters")
+        
         return value
