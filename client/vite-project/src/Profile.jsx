@@ -86,7 +86,7 @@ const Profile = () => {
                 onCancel={() => setOpen(false)}
                 onConfirm={handleDeleteAccount} />
             <ChangePassword user={ user }/>
-            <NewPhotoModal />
+            {user.role == "photographer" ? <NewPhotoModal /> : <></> }
         </Container>
     );
 

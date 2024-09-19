@@ -21,10 +21,10 @@ const schema = yup.object().shape({
       .min(3, 'Location must be at least 3 characters long')
   });
   const initialValues = {
-    first_name: '',
-    last_name: '',
-    email: '',
-    password: ''
+    session_length: '',
+    location: '',
+    booking_date: '',
+    booking_time: ''
   };
   
 
