@@ -31,9 +31,9 @@ const PhotographerDetails = () => {
 
   if (photographer)
     return (
-      <Container>
+      <Container className="photographer-details">
         <h1>{photographer.first_name}</h1>
-        <NewBooking photographerId={photographerId} />
+        <NewBooking photographerId={photographerId} name={photographer.first_name} />
         <Grid className="photographer-detail-grid">
           {photographer.photos.length > 0 ? (
             photographer.photos.map((photo) => (

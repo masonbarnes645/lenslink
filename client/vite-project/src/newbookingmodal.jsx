@@ -26,7 +26,7 @@ const schema = yup.object().shape({
   };
   
 
-const NewBooking = ({ photographerId }) =>{
+const NewBooking = ({ photographerId, name }) =>{
     const [open, setOpen] = React.useState(false);
     const { user } = useContext(UserContext)
     const handleFormSubmit = (formData, { setSubmitting }) => {
@@ -63,9 +63,7 @@ const NewBooking = ({ photographerId }) =>{
     };
   return( 
    <div>
-    <Button onClick={() => setOpen(true)} primary className='top-button'>
-        New Booking
-    </Button>
+    <Button onClick={() => setOpen(true)} primary className='top-button'>Book a session with {name}    </Button>
 
     <Modal
         onClose={() => setOpen(false)}

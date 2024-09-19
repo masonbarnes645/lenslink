@@ -12,7 +12,6 @@ const Landing = () => {
             <img src={stock_url} alt="photographer with mother" id="landing-photo" />
             <div className="content-container">
                 <div className="header">
-                    <img src="/logo.png" alt="Website Logo" className="logo" />
                     <h1 className="website-name">LensLink</h1>
                 </div>
                 <p className="blurb">Connecting you with the best professional photographers for every occasion.</p>
