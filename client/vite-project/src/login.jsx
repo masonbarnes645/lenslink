@@ -4,6 +4,7 @@ import * as yup from "yup";
 import toast from 'react-hot-toast';
 import { useContext } from 'react';
 import { UserContext } from './usercontext';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -18,6 +19,7 @@ const Login = () => {
         password: '' 
     };
     const {  setUser } = useContext(UserContext);
+    const navigate = useNavigate()
 
     const handleFormSubmit = (formData, { setSubmitting }) => {
         fetch("/api/v1/login", {
@@ -35,6 +37,7 @@ const Login = () => {
                     resp.json().then((data) => {
                         setUser(data)
                         toast.success("Logged In!")
+                        navigate('/')
                     });
                 } else {
                     return resp.json().then((errorObj) => {

@@ -11,6 +11,9 @@ import * as yup from "yup";
 import React, { useEffect } from 'react';
 import toast from "react-hot-toast";
 import './App.css'
+import { useUser } from './usercontext';
+import { useNavigate } from 'react-router-dom';
+
 
 
 
@@ -24,7 +27,9 @@ const schema = yup.object().shape({
 const PhotographerSignUp = ({ open, onClose}) => {
 
 
- 
+  const { setUser } = useUser();
+  const navigate = useNavigate()
+
 
   const handleFormSubmit = (formData, { setSubmitting }) => {
     fetch("/api/v1/signup", {
@@ -43,8 +48,11 @@ const PhotographerSignUp = ({ open, onClose}) => {
         .then((resp) => {
             if (resp.ok) {
                 return resp.json().then((data) => {
+                  setUser(data)
                   toast.success("Sign Up Successful!")  
+                  navigate(`/`);
                 });
+
             } else {
                 return resp.json().then((errorObj) => {
                     toast.error(errorObj.error);

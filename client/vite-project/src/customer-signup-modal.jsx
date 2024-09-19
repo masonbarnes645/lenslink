@@ -2,7 +2,7 @@ const initialValues = {
     first_name: '',
     last_name: '',
     email: '',
-    password_hash: '' 
+    password_hash: ''
 };
 
 import { Button, Modal, Container, Form as SemanticForm, Message, Grid, Input } from 'semantic-ui-react';
@@ -10,6 +10,11 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as yup from "yup";
 import React from 'react';
 import toast from "react-hot-toast";
+import { useUser } from './usercontext';
+import { useNavigate } from 'react-router-dom';
+
+
+
 
 const schema = yup.object().shape({
     first_name: yup.string().required("First Name is Required"),
@@ -19,7 +24,8 @@ const schema = yup.object().shape({
 });
 
 const CustomerSignUp = ({ open, onClose }) => {
-
+    const navigate = useNavigate()
+    const { setUser } = useUser();
 
     const handleFormSubmit = (formData, { setSubmitting }) => {
         fetch("/api/v1/signup", {
@@ -38,8 +44,9 @@ const CustomerSignUp = ({ open, onClose }) => {
             .then((resp) => {
                 if (resp.ok) {
                     return resp.json().then((data) => {
-                        navigate(`/profile`);
-                        setOpen(false); 
+                        setUser(data)
+                        toast.success("Sign Up Successful!")
+                        navigate(`/`);
                     });
                 } else {
                     return resp.json().then((errorObj) => {

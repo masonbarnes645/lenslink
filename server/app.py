@@ -76,6 +76,9 @@ class Signup(Resource):
             serialized_user["role"] = session.get("role")
             return make_response(serialized_user, 201)
 
+        except ValueError as e:
+            return make_response({"error": str(e)}, 400)
+        
         except Exception as e:
             db.session.rollback()
             if "UNIQUE constraint failed" in str(e):
