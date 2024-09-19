@@ -55,7 +55,7 @@ class Booking(db.Model, SerializerMixin):
             except ValueError:
                 raise ValueError("Invalid time format. Use 'HH:MM' format.")
     
-        # if not (time(8, 0) <= booking_time <= time(20, 0)):
-        #     raise ValueError("Booking time must be between 8:00 AM and 8:00 PM")
+        if not (time(8, 0) <= booking_time <= time(20, 0)):
+            raise ValueError("Booking time must be between 8:00 AM and 8:00 PM")
         
         return booking_time

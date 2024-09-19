@@ -5,6 +5,8 @@ import Bslate from "./BookingSlate";
 import { Container, Grid, Button, Confirm } from "semantic-ui-react";
 import ChangePassword from "./ChangePassword";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import NewPhotoModal from "./NewPhotoModal";
 
 const Profile = () => {
     const { user, setUser } = useContext(UserContext);
@@ -37,7 +39,9 @@ const Profile = () => {
         })
         .then((res) => {
             if (res.ok) {
+                setUser(null)
                 toast.success("Account Deleted");
+                navigate('/');
             } else {
                 return res.json().then((errorObj) => {
                     toast.error(errorObj.error);
@@ -82,6 +86,7 @@ const Profile = () => {
                 onCancel={() => setOpen(false)}
                 onConfirm={handleDeleteAccount} />
             <ChangePassword user={ user }/>
+            <NewPhotoModal />
         </Container>
     );
 
