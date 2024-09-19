@@ -7,7 +7,7 @@ import ChangePassword from "./changepassword";
 import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
-    const { user } = useContext(UserContext);
+    const { user, setUser } = useContext(UserContext);
     const [open, setOpen] = useState(false)
     const navigate = useNavigate()
     
@@ -18,7 +18,8 @@ const Profile = () => {
             method: "DELETE",
         })
         .then((res) => {
-            if (res.status == 204) {
+            if (res.ok) {
+                setUser(null)
                 toast.success("Account Deleted");
                 navigate('/');
             } else {

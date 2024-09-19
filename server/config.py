@@ -20,6 +20,12 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.json.compact = False
 app.secret_key = environ.get("SESSION_SECRET")
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USERNAME'] = 'lenslinkoutreach@gmail.com'
+app.config['MAIL_PASSWORD'] = 'idsa fmnj keyy rosg'
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USE_SSL'] = False
 
 # Define metadata, instantiate db
 metadata = MetaData(naming_convention={

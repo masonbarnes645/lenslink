@@ -1,6 +1,7 @@
 # Remote library imports
 from flask import request, make_response, session
 from flask_restful import Resource
+from flask_mail import Mail, Message
 # from dotenv import load_dotenv
 import os
 from datetime import datetime
@@ -16,7 +17,8 @@ from models.customer import Customer
 from models.photo import Photograph
 from models.photographer import Photographer
 from models.review import Review
-# load_dotenv()
+
+mail = Mail(app)
 
 class PhotoById(Resource):
     def get(self, id):
@@ -66,6 +68,7 @@ class Signup(Resource):
                 new_user = Photographer(**data)
             else:
                 return make_response({"error": "Invalid role provided"}, 400)
+            send_signup_email(email)
 
             db.session.add(new_user)
             db.session.commit()
@@ -246,36 +249,13 @@ class BookingById(Resource):
         except Exception as e:
             return make_response({"error": str(e)}, 400)
 
-# class Google(Resource):
-#     def authenticate_google():
-#         data = request.json
-#         id_token = data.get('id_token')
-        
-
-#         CLIENT_ID = '149675200689-v4e6n63l8uf098kemu3mss77kgi6qhp4.apps.googleusercontent.com'
-
-#         try:
-#             response = requests.get(
-#                 f'https://www.googleapis.com/oauth2/v3/tokeninfo?id_token={id_token}'
-#             )
-#             response.raise_for_status()
-#             token_info = response.json()
-
-#             if token_info['aud'] != CLIENT_ID:
-#                 return ({'error': 'Invalid token'}), 401
-
-
-#             user = {
-#                 'sub': token_info['sub'],
-#                 'name': token_info.get('name'),
-#                 'email': token_info.get('email')
-#             }
-
-#             return ({'user': user}), 200
-
-#         except Exception as e:
-#             return ({'error': str(e)}), 500
-
+def send_signup_email(user_email):
+    msg = Message('Welcome to LensLink!',
+                  sender='lenslinkoutreach@gmail.com',
+                  recipients=[user_email])
+    msg.body = 'Thank you for sign up with us for LensLink, the premier platform for connecting you with the ideal photographer'
+    with app.app_context():
+        mail.send(msg)
 
 api.add_resource(PhotoById, "/photographs/<int:id>")
 api.add_resource(Photos, "/photographs")
