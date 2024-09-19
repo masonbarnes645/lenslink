@@ -11,20 +11,36 @@
   overflow-x: auto;
 
 }
-
+.ui.dimmer {
+  background-color: rgba(0, 0, 0, 0.5); 
+}
 .sign-up-modal {
   top: 20%;
   left: 30%;
-  background-color: blue;
-  width: 600px;
+  background-color: whitesmoke;
+  width: 700px;
   position:absolute;
   text-align: center;
+  border-radius: 10px ;
+  color: black;
 
 }
 
-.sign-up-header{
-  background-color: aliceblue;
+.sign-up-header {
+  background-color: whitesmoke;
   color: black;
+  border-radius: 10px;
+  border-color: #218838;
+  border-style: solid;
+  border-width: 30px;
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  text-align: center; 
+  padding: 20px; 
+  box-sizing: border-box; 
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: larger;
 }
 
 .app{
@@ -199,4 +215,13 @@ button:hover {
 .signup-button {
   padding: 10px 20px;
   font-size: 1.2rem;
+}
+
+.SU-modal-button{
+  background-color:#218838 ;
+  border-color: black;
+  border-style: solid;
+  margin-top: 20px ;
+  margin-bottom: 10px;
+  
 }

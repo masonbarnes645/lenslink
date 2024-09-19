@@ -148,7 +148,7 @@ const CustomerSignUp = ({ open, onClose }) => {
                                         </Grid.Row>
                                         <Grid.Row>
                                             <Grid.Column>
-                                                <Button type='submit' fluid primary loading={isSubmitting} disabled={isSubmitting}>
+                                                <Button type='submit' fluid primary loading={isSubmitting} disabled={isSubmitting} className='SU-modal-button'>
                                                     Sign Up
                                                 </Button>
                                             </Grid.Column>
@@ -160,7 +160,7 @@ const CustomerSignUp = ({ open, onClose }) => {
                     </Container>
                 </Modal.Content>
                 <Modal.Actions>
-                    <Button color="black" onClick={onClose}>
+                    <Button color="black" onClick={onClose} className='SU-modal-button'>
                         Cancel
                     </Button>
                 </Modal.Actions>
