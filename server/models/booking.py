@@ -1,4 +1,5 @@
-from models.__init__ import SerializerMixin, validates, db, datetime, association_proxy 
+from models.__init__ import SerializerMixin, validates, db, datetime, association_proxy
+from datetime import date, time
 
 
 
@@ -9,8 +10,8 @@ class Booking(db.Model, SerializerMixin):
     customer_id = db.Column(db.Integer, db.ForeignKey('customers.id'))
     photographer_id = db.Column(db.Integer, db.ForeignKey('photographers.id'))
     session_length = db.Column(db.Float)
-    booking_date = db.Column(db.String)
-    booking_time = db.Column(db.Float)
+    booking_date = db.Column(db.Date)
+    booking_time = db.Column(db.Time)
     location = db.Column(db.String)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
@@ -23,19 +24,21 @@ class Booking(db.Model, SerializerMixin):
 
 
     @validates("session_length")
-    def session_length(self, _, session_length):
-        if not isinstance(session_length, float):
-            raise TypeError("session length must be of type float")
+    def validate_session_length(self, _, session_length):
         if session_length % 0.5 != 0:
             raise ValueError("session length must be in increments of 0.5")
         return session_length
     
     @validates("booking_date")
     def validate_booking_date(self, _, booking_date):
-        if not isinstance(booking_date, datetime):
-            raise TypeError("booking date must be of type datetime")
-        if booking_date <= datetime.now():
-            raise ValueError("booking date must be in the future")
+        if isinstance(booking_date, str):
+            try:
+                booking_date = datetime.strptime(booking_date, '%Y-%m-%d').date()
+            except ValueError:
+                raise ValueError("Invalid date format. Use 'YYYY-MM-DD' format.")
+        if booking_date <= date.today():
+            raise ValueError("Booking date must be in the future")
+        
         return booking_date
    
     @validates("location")
@@ -45,8 +48,14 @@ class Booking(db.Model, SerializerMixin):
         return location
     
     @validates("booking_time")
-    def validate_booking_time(self,_, booking_time):
-        if not isinstance(booking_time, float):
-            raise TypeError("booking time must be of type float")
+    def validate_booking_time(self, _, booking_time):
+        if isinstance(booking_time, str):
+            try:
+                booking_time = datetime.strptime(booking_time, '%H:%M').time()
+            except ValueError:
+                raise ValueError("Invalid time format. Use 'HH:MM' format.")
     
+        if not (time(8, 0) <= booking_time <= time(20, 0)):
+            raise ValueError("Booking time must be between 8:00 AM and 8:00 PM")
         
+        return booking_time

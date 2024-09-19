@@ -42,14 +42,14 @@ const NewBooking = ({ photographerId, name }) =>{
                 photographer_id: photographerId,
                 session_length: formData.session_length,
                 location: formData.location, 
-                booking_date: formData.booking_date
+                booking_date: formData.booking_date,
+                booking_time: formData.booking_time
             })
         })
             .then((resp) => {
                 if (resp.ok) {
                     return resp.json().then((data) => {
-                        
-                        navigate(`/profile`);
+                        toast.success("Session Booked!")
                         setOpen(false); 
                     });
                 } else {
