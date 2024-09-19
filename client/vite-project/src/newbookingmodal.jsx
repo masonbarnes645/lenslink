@@ -5,6 +5,8 @@ import * as yup from "yup";
 import React, { useContext } from 'react';
 import toast from "react-hot-toast";
 import { UserContext } from './usercontext';
+import './App.css'
+
 
 const schema = yup.object().shape({
     session_length: yup.number()
@@ -71,8 +73,10 @@ const NewBooking = ({ photographerId, name }) =>{
         open={open}
         dimmer='blurring'
         size='large'
+        className='sign-up-modal'
+
     >
-        <Modal.Header>Add a New Booking</Modal.Header>
+        <Modal.Header className='sign-up-header'>Add a New Booking</Modal.Header>
 
         <Modal.Content>
             <Container text>
@@ -120,6 +124,23 @@ const NewBooking = ({ photographerId, name }) =>{
                 <Grid.Row>
                     <Grid.Column>
                         <SemanticForm.Field>
+                            <label htmlFor="booking_time">Booking Time</label>
+                            <Field
+                                as={Input}
+                                name="booking_time"
+                                type="time"
+                                placeholder="Booking Time"
+                                fluid
+                                min="08:00"  
+                                max="20:00" 
+                            />
+                            <ErrorMessage name="booking_date" component={Message} negative />
+                        </SemanticForm.Field>
+                    </Grid.Column>
+                </Grid.Row>
+                <Grid.Row>
+                    <Grid.Column>
+                        <SemanticForm.Field>
                             <label htmlFor="booking_date">Booking Date</label>
                             <Field
                                 as={Input}
@@ -134,7 +155,7 @@ const NewBooking = ({ photographerId, name }) =>{
                 </Grid.Row>
                 <Grid.Row>
                     <Grid.Column>
-                        <Button type='submit' fluid primary loading={isSubmitting} disabled={isSubmitting}>
+                        <Button type='submit' fluid primary loading={isSubmitting} disabled={isSubmitting} className='SU-modal-button'>
                             Book Now
                         </Button>
                     </Grid.Column>
@@ -146,7 +167,7 @@ const NewBooking = ({ photographerId, name }) =>{
             </Container>
         </Modal.Content>
         <Modal.Actions>
-            <Button color="black" onClick={() => setOpen(false)}>
+            <Button color="black" onClick={() => setOpen(false)} className='SU-modal-button'>
                 Cancel
             </Button>
         </Modal.Actions>

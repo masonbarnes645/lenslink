@@ -44,4 +44,9 @@ class Booking(db.Model, SerializerMixin):
             raise TypeError("location must be a string")
         return location
     
+    @validates("booking_time")
+    def validate_booking_time(self,_, booking_time):
+        if not isinstance(booking_time, float):
+            raise TypeError("booking time must be of type float")
+    
         
