@@ -9,9 +9,11 @@ const Bslate = ({ booking_date, booking_time, location, photographer, id }) => {
                 to={`/bookings/${id}`}
                 style={({ isActive }) => ({
                     fontWeight: isActive ? 'bold' : 'normal',
-                    textDecoration: 'none'
+                    textDecoration: 'none',
+                
                 })}
-            > See details about this booking</NavLink>
+                className="booking-link"
+            > See details about this booking:</NavLink>
             <h3>{location}</h3>
             <h4>{booking_date} : {booking_time}</h4>
             <h4>{photographer}</h4>

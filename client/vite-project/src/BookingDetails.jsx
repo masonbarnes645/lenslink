@@ -59,7 +59,7 @@ const BookingDetails = () => {
   if (!customer) return <p>Loading customer details...</p>;
 
   return (
-    <div>
+    <div className="booking-container">
       <h1>Location: {booking.location}</h1>
       <h2>Date: {booking.booking_date} Time: {booking.booking_time}</h2>
       <h2>Length of Session: {booking.session_length} hours</h2>

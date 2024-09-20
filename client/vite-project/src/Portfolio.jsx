@@ -32,13 +32,13 @@ const Portfolio = () => {
   };
 
   const userHTML = (
-    <Container className="photographer-details">
-      <Grid className="photographer-detail-grid">
+    <Container className="port-container">
+      <Grid  >
         {photos.length > 0 ? (
           photos.map((photo) => (
             <Grid.Column key={photo.id}>
               <img
-                className="slate-photo"
+                className="portfolio-photo"
                 src={photo.image_url}
                 alt={photo.title}
               />

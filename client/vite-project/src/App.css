@@ -6,6 +6,17 @@
   margin-left: 50px;
 }
 
+.portfolio-photo {
+  height: 400px;
+  width: auto;
+  margin-right: 50px;
+  margin-left: 50px;
+}
+
+.port-container{
+  padding-top: 250px;
+}
+
 .photo-slate {
   display: flex;
   flex-wrap: nowrap;
@@ -31,7 +42,7 @@
   background-color: whitesmoke;
   color: black;
   border-radius: 10px;
-  border-color: #218838;
+  border-color: #0D0D0D;
   border-style: solid;
   border-width: 30px;
   display: flex;
@@ -45,7 +56,7 @@
 }
 
 .app{
-  background-color: #1FE593;
+  background-color: #35D0F2;
   display: flex;
   align-items: center;
 }
@@ -57,7 +68,7 @@
   top: 0;
   width: 100%;
   z-index: 1000;
-  background-color: #24362F;
+  background-color: #1DF2F2;
   height: 60px; 
   display: flex;
   flex-direction: row; 
@@ -73,7 +84,7 @@
 }
 
 .nav-menu a {
-  color: #2E8C6B;
+  color: #0A4036;
   padding-right: 40px;
   padding-left: 40px;
   text-decoration: none; 
@@ -85,6 +96,7 @@
     justify-content: center;
     height: 100vh;
     padding: 20px;
+    color: #0D0D0D;
 }
 
 #landing-photo {
@@ -153,7 +165,7 @@ button:hover {
 }
 
 .left-button {
-    background-color: #ffc107;
+    background-color: #0D0D0D;
 }
 
 .left-button:hover {
@@ -161,7 +173,7 @@ button:hover {
 }
 
 .top-button {
-    background-color: #17a2b8;
+    background-color: #0A4036;
 }
 
 .top-button:hover {
@@ -219,19 +231,29 @@ button:hover {
 }
 
 .SU-modal-button{
-  background-color:#218838 ;
+  background-color:#35D0F2 ;
   border-color: black;
   border-style: solid;
   margin-top: 20px ;
   margin-bottom: 10px;
+  color: #0A4036 ;
   
 }
 
 .browse-photographers{
   padding-top: 50px;
+  color: #0A4036;
 }
 
 .profile-container{
   padding-left: 800px;
   align-items: center;
+  color: #0D0D0D;
+}
+
+.booking-container{
+  color: #0D0D0D;
+}
+.booking-link{
+  color: #0A4036;
 }

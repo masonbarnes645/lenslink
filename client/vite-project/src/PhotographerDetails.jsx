@@ -33,7 +33,7 @@ const PhotographerDetails = () => {
     return (
       <Container className="photographer-details">
         <h1>{photographer.first_name}</h1>
-        <NewBooking photographerId={photographerId} name={photographer.first_name} />
+        {user && user.role === "customer" ?<NewBooking photographerId={photographerId} name={photographer.first_name} /> : null }
         <Grid className="photographer-detail-grid">
           {photographer.photos.length > 0 ? (
             photographer.photos.map((photo) => (
