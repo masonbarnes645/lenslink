@@ -4,51 +4,52 @@ import Signup from "./Signup";
 import Bslate from "./BookingSlate";
 import { Container, Grid, Button, Confirm } from "semantic-ui-react";
 import ChangePassword from "./ChangePassword";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import NewPhotoModal from "./NewPhotoModal";
+import Portfolio from "./Portfolio";
 
 const Profile = () => {
     const { user, setUser } = useContext(UserContext);
     const [open, setOpen] = useState(false)
     const navigate = useNavigate()
-    
-    const show = () => {setOpen(true)}
+
+    const show = () => { setOpen(true) }
 
     const handleDeleteCustomer = () => {
         fetch(`/api/v1/customers/${user.id}`, {
             method: "DELETE",
         })
-        .then((res) => {
-            if (res.ok) {
-                setUser(null)
-                toast.success("Account Deleted");
-                navigate('/');
-            } else {
-                return res.json().then((errorObj) => {
-                    toast.error(errorObj.error);
-                });
-            }
-        })
-        .catch((errorObj) => toast.error(errorObj.error));
+            .then((res) => {
+                if (res.ok) {
+                    setUser(null)
+                    toast.success("Account Deleted");
+                    navigate('/');
+                } else {
+                    return res.json().then((errorObj) => {
+                        toast.error(errorObj.error);
+                    });
+                }
+            })
+            .catch((errorObj) => toast.error(errorObj.error));
     };
 
     const handleDeletePhotographer = () => {
         fetch(`/api/v1/photographers/${user.id}`, {
             method: "DELETE",
         })
-        .then((res) => {
-            if (res.ok) {
-                setUser(null)
-                toast.success("Account Deleted");
-                navigate('/');
-            } else {
-                return res.json().then((errorObj) => {
-                    toast.error(errorObj.error);
-                });
-            }
-        })
-        .catch((errorObj) => toast.error(errorObj.error));
+            .then((res) => {
+                if (res.ok) {
+                    setUser(null)
+                    toast.success("Account Deleted");
+                    navigate('/');
+                } else {
+                    return res.json().then((errorObj) => {
+                        toast.error(errorObj.error);
+                    });
+                }
+            })
+            .catch((errorObj) => toast.error(errorObj.error));
     };
 
     const handleDeleteAccount = () => {
@@ -85,8 +86,13 @@ const Profile = () => {
                 open={open}
                 onCancel={() => setOpen(false)}
                 onConfirm={handleDeleteAccount} />
-            <ChangePassword user={ user }/>
-            {user.role == "photographer" ? <NewPhotoModal /> : <></> }
+            <ChangePassword user={user} />
+            {user.role == "photographer" ? <NewPhotoModal /> : <></>}
+            {user.role === "photographer" ? (
+                <Button as={NavLink} to="/myportfolio" primary>
+                    View My Portfolio
+                </Button>
+            ) : null}
         </Container>
     );
 
@@ -97,7 +103,7 @@ const Profile = () => {
             {user ? userHTML : (
                 <>
                     <h2>Not a Member yet? Sign up:</h2>
-                    <Signup user={ user }/>
+                    <Signup user={user} />
                 </>
             )}
         </div>

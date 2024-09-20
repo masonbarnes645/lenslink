@@ -7,6 +7,7 @@ import Login from "./Login";
 import PhotographerDetails from "./PhotographerDetails";
 import Profile from "./Profile";
 import BookingDetails from "./BookingDetails";
+import Portfolio from "./Portfolio";
 
 export const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ export const router = createBrowserRouter([
       {
         path: "/bookings/:bookingId",
         element: <BookingDetails />
+      },
+      {
+        path:"/myportfolio",
+        element:<Portfolio />
       }
     ],
   },
