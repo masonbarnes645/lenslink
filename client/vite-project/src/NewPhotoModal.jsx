@@ -55,7 +55,7 @@ const NewPhotoModal = ({ photographerId }) => {
 
     return (
         <div>
-            <Button onClick={() => setOpen(true)} primary className='top-button'>Upload a Photo</Button>
+            <Button onClick={() => setOpen(true)} primary className="SU-modal-button">Upload a Photo</Button>
 
             <Modal
                 onClose={() => setOpen(false)}

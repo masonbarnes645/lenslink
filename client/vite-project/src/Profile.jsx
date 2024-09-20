@@ -4,7 +4,7 @@ import Signup from "./Signup";
 import Bslate from "./BookingSlate";
 import { Container, Grid, Button, Confirm } from "semantic-ui-react";
 import ChangePassword from "./ChangePassword";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import NewPhotoModal from "./NewPhotoModal";
 
@@ -90,9 +90,11 @@ const Profile = () => {
             {user && user.role === "photographer" ? (
                 <>
                     <NewPhotoModal />
-                    <Button as={NavLink} to="/myportfolio" primary className='SU-modal-button'>
-                        View My Portfolio
-                    </Button>
+                    <Link to="/myportfolio">
+                        <Button primary className='SU-modal-button'>
+                            View My Portfolio
+                        </Button>
+                    </Link>
                 </>
             ) : null}
 
