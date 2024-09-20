@@ -7,7 +7,7 @@ import ChangePassword from "./ChangePassword";
 import { NavLink, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import NewPhotoModal from "./NewPhotoModal";
-import Portfolio from "./Portfolio";
+
 
 const Profile = () => {
     const { user, setUser } = useContext(UserContext);
@@ -87,12 +87,15 @@ const Profile = () => {
                 onCancel={() => setOpen(false)}
                 onConfirm={handleDeleteAccount} />
             <ChangePassword user={user} />
-            {user.role == "photographer" ? <NewPhotoModal /> : <></>}
-            {user.role === "photographer" ? (
-                <Button as={NavLink} to="/myportfolio" primary>
-                    View My Portfolio
-                </Button>
+            {user && user.role === "photographer" ? (
+                <>
+                    <NewPhotoModal />
+                    <Button as={NavLink} to="/myportfolio" primary className='SU-modal-button'>
+                        View My Portfolio
+                    </Button>
+                </>
             ) : null}
+
         </Container>
     );
 

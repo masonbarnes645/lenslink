@@ -1,50 +1,70 @@
+import { Button, Container, Grid } from "semantic-ui-react";
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import { UserContext } from "./usercontext";
-import NewBooking from "./NewBookingModal";
-import { Container, Grid } from "semantic-ui-react";
-import './App.css'
-
+import './App.css';
 
 const Portfolio = () => {
+  const { user } = useContext(UserContext);
+  const [photos, setPhotos] = useState([]);
 
 
-  const { user } = useContext(UserContext)
+  useEffect(() => {
+    if (user && user.photos) {
+      setPhotos(user.photos);
+    }
+  }, [user]);
+
+  const handleDelete = (photoId) => {
+    fetch(`/api/v1/photographs/${photoId}`, {
+      method: 'DELETE',
+    })
+      .then((resp) => {
+        if (resp.ok) {
+          setPhotos((prevPhotos) => prevPhotos.filter((photo) => photo.id !== photoId));
+          console.log(`Photo with ID ${photoId} deleted`);
+        } else {
+          resp.json().then((error) => {
+            console.error(error);
+          });
+        }
+      })
+      .catch((error) => console.error('Error:', error));
+  };
 
   const userHTML = (
     <Container className="photographer-details">
       <Grid className="photographer-detail-grid">
-        {user.photos.length > 0 ? (
-          user.photos.map((photo) => (
+        {photos.length > 0 ? (
+          photos.map((photo) => (
             <Grid.Column key={photo.id}>
               <img
                 className="slate-photo"
                 src={photo.image_url}
                 alt={photo.title}
-
               />
+              <Button 
+                color="red" 
+                onClick={() => handleDelete(photo.id)} 
+                className="SU-modal-button"
+              >
+                Delete Photo
+              </Button>
             </Grid.Column>
           ))
         ) : (
           <Grid.Column>
-          <h2>No photographers</h2>
+            <h2>No photographs</h2>
           </Grid.Column>
         )}
       </Grid>
-
     </Container>
-  )
+  );
 
   return (
     <div>
-        {user ? userHTML : (
-            <>
-            </>
-        )}
+      {user ? userHTML : <p>Loading...</p>}
     </div>
-);
+  );
 }
 
-export default Portfolio
-
-
+export default Portfolio;

@@ -2,10 +2,8 @@
 from flask import request, make_response, session
 from flask_restful import Resource
 from flask_mail import Mail, Message
-# from dotenv import load_dotenv
 import os
 from datetime import datetime
-# from requests import request
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 DATABASE = os.environ.get("DB_URI", f"sqlite:///{os.path.join(BASE_DIR, 'app.db')}")
@@ -31,6 +29,17 @@ class PhotoById(Resource):
                 return make_response(photo.to_dict(), 200)
         except Exception as e:
             return make_response({"error": str(e)}, 404)
+    def delete(self, id):
+        try:
+            if photograph := db.session.get(Photograph, id):
+                    db.session.delete(photograph)
+                    db.session.commit()
+                    return {}, 204
+        except Exception as e:
+            db.session.rollback()
+            return make_response({"error": str(e)}, 400)
+
+    
 
         
 
@@ -154,7 +163,7 @@ class Logout(Resource):
 class Photographers(Resource):
     def get(self):
         try:
-            return make_response([photographer.to_dict() for photographer in Photographer.query], 200)
+            return make_response([photographer.to_dict(rules=("-bookings",)) for photographer in Photographer.query], 200)
         except Exception as e:
             return make_response({"error": str(e)}, 404)
         
@@ -163,7 +172,7 @@ class PhotographerById(Resource):
         try:
             photographer = db.session.get(Photographer, id)
             if photographer:
-                return make_response(photographer.to_dict(), 200 )
+                return make_response(photographer.to_dict(rules=("-bookings",)), 200) 
             return make_response({"error": str(e)}, 404)
         except Exception as e:
             return make_response({"error": str(e)}, 400)
