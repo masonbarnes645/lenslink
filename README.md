@@ -4,6 +4,9 @@ LensLink is a conceptual platform designed to connect professional photographers
 
 Though not fully functional, LensLink demonstrates scalability and integrates key technical concepts such as state management, database design, full CRUD operations, and UI/UX principles. This prototype showcases the foundation for a robust app that could facilitate seamless connections within the photography industry.
 
+![Landing Page](LLREADMEpic.jpg)
+
+
 # How It's Made
 Frontend:
 
