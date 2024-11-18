@@ -20,7 +20,12 @@ photos = ["https://images.pexels.com/photos/27914301/pexels-photo-27914301/free-
           "https://images.pexels.com/photos/25786814/pexels-photo-25786814/free-photo-of-reflection-of-a-woman-in-small-pieces-of-a-broken-mirror-held-by-two-hands-in-front-of-an-apartment-building-in-black-and-white.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
           "https://images.pexels.com/photos/28589065/pexels-photo-28589065/free-photo-of-black-and-white-portrait-by-river.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
           "https://images.pexels.com/photos/14467849/pexels-photo-14467849.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-          "https://images.pexels.com/photos/29140770/pexels-photo-29140770/free-photo-of-cozy-dog-relaxing-on-a-couch-in-the-living-room.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"]
+          "https://images.pexels.com/photos/29140770/pexels-photo-29140770/free-photo-of-cozy-dog-relaxing-on-a-couch-in-the-living-room.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+          "https://images.pexels.com/photos/24877164/pexels-photo-24877164/free-photo-of-a-woman-standing-in-front-of-a-rug.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+          "https://images.pexels.com/photos/29435310/pexels-photo-29435310/free-photo-of-close-up-of-cinnamon-sticks-in-a-bowl.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+          "https://images.pexels.com/photos/4309368/pexels-photo-4309368.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+          "https://images.pexels.com/photos/5390348/pexels-photo-5390348.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+          "https://images.pexels.com/photos/29250590/pexels-photo-29250590/free-photo-of-vibrant-autumn-foliage-in-a-forest-setting.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"]
 
 
 def generate_random_time():
