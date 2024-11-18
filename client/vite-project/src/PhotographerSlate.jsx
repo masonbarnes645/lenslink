@@ -12,7 +12,8 @@ const PSlate = ({ first_name, last_name, id, photos }) => {
                 to={`/photographers/${id}`}
                 style={({ isActive }) => ({
                     fontWeight: isActive ? 'bold' : 'normal',
-                    textDecoration: 'none'
+                    textDecoration: 'none',
+                    
                 })}
             > See More Pictures From {first_name}</NavLink>
             <Grid className="photo-slate">

@@ -20,7 +20,8 @@
 .photo-slate {
   display: flex;
   flex-wrap: nowrap;
-  overflow-x: auto;
+  object-fit: cover;
+  overflow-x: scroll;
 
 }
 .ui.dimmer {
@@ -59,6 +60,7 @@
   background-color: #35D0F2;
   display: flex;
   align-items: center;
+  overflow-x: hidden;
 }
 
 
@@ -183,9 +185,10 @@ button:hover {
 
 .photographer-detail-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); 
+  grid-template-columns: repeat(3, 1fr); 
   gap: 60px; 
   margin-top: 20px;
+  padding-left: 180px;
   
 }
 
@@ -256,4 +259,21 @@ button:hover {
 }
 .booking-link{
   color: #0A4036;
+}
+
+.login-container {
+  height: 100vh; 
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  padding-left: 750px;
+}
+
+.login-form-container {
+  width: 400px; 
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  color: #0D0D0D;
 }

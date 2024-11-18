@@ -313,7 +313,27 @@ def send_signup_email(user_email):
         sender="lenslinkoutreach@gmail.com",
         recipients=[user_email],
     )
-    msg.body = "Thank you for signing up with us for LensLink, the premier platform for connecting you with the ideal photographer for any occasion"
+    msg.body = """
+    Thank you for joining LensLink, the premier platform for connecting you with the ideal photographer for any occasion! 
+    We’re thrilled to have you as part of our growing community, where capturing life's most cherished moments becomes effortless and personalized.
+
+    At LensLink, we understand that every moment is unique, whether it’s a wedding, a family portrait session, a corporate event, or a creative project. 
+    Our mission is to match you with the best photographer tailored to your specific needs, style, and vision.
+
+    Here’s what you can look forward to:
+
+    - A Network of Photographers: Explore a diverse range of talented photographers, each with their own unique style and specialties.
+    - Personalized Recommendations: Based on your preferences and project, we help you find the perfect fit to bring your vision to life.
+    - Hassle-Free Booking: With our easy-to-use booking system, securing the right photographer is just a few clicks away.
+    - Seamless Communication: Once you find the perfect match, communicate directly with the photographer to finalize all the details and ensure everything goes smoothly.
+
+    We’re here to support you every step of the way. If you have any questions, our friendly support team is always ready to assist.
+
+    Start exploring now and get ready to turn your moments into memories that will last a lifetime!
+
+    Warm regards,
+    The LensLink Team
+    """
     with app.app_context():
         mail.send(msg)
 

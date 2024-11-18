@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { UserContext } from "./usercontext";
 import NewBooking from "./NewBookingModal";
-import { Container, Grid } from "semantic-ui-react";
+import { Container, Grid, Item } from "semantic-ui-react";
 import './App.css'
 
 
@@ -32,26 +32,27 @@ const PhotographerDetails = () => {
   if (photographer)
     return (
       <Container className="photographer-details">
-        <h1>{photographer.first_name}</h1>
-        {user && user.role === "customer" ?<NewBooking photographerId={photographerId} name={photographer.first_name} /> : null }
-        <Grid className="photographer-detail-grid">
+        <h1 style={{marginLeft:'14rem'}}>{photographer.first_name}</h1>
+        {user && user.role === "customer" ? <NewBooking photographerId={photographerId} name={photographer.first_name} /> : null}
+        <Grid className="photographer-detail-grid" columns={3} stackable>
           {photographer.photos.length > 0 ? (
             photographer.photos.map((photo) => (
-              <Grid.Column key={photo.id}>
+              <Item key={photo.id}>
                 <img
                   className="slate-photo"
                   src={photo.image_url}
                   alt={photo.title}
-
                 />
-              </Grid.Column>
+              </Item>
             ))
           ) : (
             <Grid.Column>
-            <h2>No photographers</h2>
+              <h2>No photographers</h2>
             </Grid.Column>
           )}
         </Grid>
+
+
 
       </Container>
     )

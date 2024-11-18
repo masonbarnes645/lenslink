@@ -53,7 +53,8 @@ const Login = () => {
 
 
     return(
-    <Container text>
+    <div className='login-container'>
+    <Container text className='login-form-container'>
                         <Formik
                             initialValues={initialValues}
                             validationSchema={schema}
@@ -106,6 +107,7 @@ const Login = () => {
                             )}
                         </Formik>
                     </Container>
+                    </div>
 )
 
 

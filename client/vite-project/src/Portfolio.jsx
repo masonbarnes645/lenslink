@@ -2,6 +2,7 @@ import { Button, Container, Grid } from "semantic-ui-react";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "./usercontext";
 import './App.css';
+import toast from "react-hot-toast";
 
 const Portfolio = () => {
   const { user } = useContext(UserContext);
@@ -21,7 +22,7 @@ const Portfolio = () => {
       .then((resp) => {
         if (resp.ok) {
           setPhotos((prevPhotos) => prevPhotos.filter((photo) => photo.id !== photoId));
-          console.log(`Photo with ID ${photoId} deleted`);
+          toast.success("Picture Removed ")
         } else {
           resp.json().then((error) => {
             console.error(error);

@@ -16,6 +16,8 @@ from models.review import Review
 
 fake = Faker()
 
+photos = ["https://images.pexels.com/photos/27914301/pexels-photo-27914301/free-photo-of-reflexion-urbana.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1","https://images.pexels.com/photos/25786814/pexels-photo-25786814/free-photo-of-reflection-of-a-woman-in-small-pieces-of-a-broken-mirror-held-by-two-hands-in-front-of-an-apartment-building-in-black-and-white.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"]
+
 
 def generate_random_time():
     hour = random.randint(8, 19)
@@ -83,7 +85,7 @@ def seed_data():
             photograph = Photograph(
                 booking_id=random.choice(bookings).id,
                 photographer_id=random.choice(photographers).id,
-                image_url=fake.unique.image_url(),
+                image_url=random.choice(photos),
                 title=fake.sentence(nb_words=1),
                 description=fake.sentence(),
             )
