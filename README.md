@@ -20,9 +20,11 @@ SQLite was chosen as the database for its simplicity and suitability for prototy
 Clone this repository 
 
 Frontend:
+    
     cd client/vite-project && npm install
     npm start
 
-Backend
-    cd server && pip install -r requirements.txt
+Backend:
+    
+    d server && pip install -r requirements.txt
     python app.py
