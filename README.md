@@ -9,7 +9,20 @@ Frontend:
 
 Built with React for dynamic and responsive user interfaces.
 Styled using Semantic UI for a professional and consistent design, along with custom CSS for unique elements.
+
+
 Backend:
 
 Developed using Python and SQLAlchemy, leveraging their strengths in creating a robust and efficient backend.
 SQLite was chosen as the database for its simplicity and suitability for prototyping.
+
+# Installation
+Clone this repository 
+
+Frontend:
+    cd client/vite-project && npm install
+    npm start
+
+Backend
+    cd server && pip install -r requirements.txt
+    python app.py
