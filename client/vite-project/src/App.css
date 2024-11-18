@@ -21,7 +21,6 @@
   display: flex;
   flex-wrap: nowrap;
   object-fit: cover;
-  overflow-x: scroll;
 
 }
 .ui.dimmer {
