@@ -22,6 +22,7 @@
   flex-wrap: nowrap;
   object-fit: cover;
 
+
 }
 .ui.dimmer {
   background-color: rgba(0, 0, 0, 0.5); 
@@ -263,9 +264,8 @@ button:hover {
 .login-container {
   height: 100vh; 
   display: flex;
-  justify-content: center; 
   align-items: center; 
-  padding-left: 750px;
+
 }
 
 .login-form-container {
